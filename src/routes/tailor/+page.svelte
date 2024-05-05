@@ -2,11 +2,11 @@
 	import { goto } from '$app/navigation';
 
 	function gotoLogin() {
-		goto('merchant/login');
+		goto('tailor/login');
 	}
 
 	function gotoRegister() {
-		goto('merchant/register');
+		goto('tailor/register');
 	}
 </script>
 

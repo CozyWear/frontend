@@ -1,6 +1,10 @@
+<script lang="ts">
+	import user from '$lib/assets/images/user.svg';
+</script>
+
 <form action="" method="">
 	<div class="imgcontainer">
-		<img src="/src/routes/img/img2.jpg" alt="Avatar" class="avatar" />
+		<img src={user} alt="Avatar" class="avatar" />
 	</div>
 
 	<div class="container">
