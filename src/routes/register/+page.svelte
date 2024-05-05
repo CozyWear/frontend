@@ -67,6 +67,14 @@
 	}
 </script>
 
+<svelte:head>
+	<title>Register</title>
+	<meta
+		name="description"
+		content="Register with CozyWear for cozy, stylish clothing and accessories. Sign up today for exclusive updates on our latest collections."
+	/>
+</svelte:head>
+
 <div class="bg-black min-h-screen flex justify-center items-center">
 	<form
 		class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-1/3"
