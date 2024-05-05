@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { api_url } from '$lib/constants';
+	import { customer_id, tailor_id, merchant_id } from '$lib/constants';
 
 	let email: string;
 	let password: string;
@@ -33,19 +34,48 @@
 	}
 </script>
 
-<form on:submit|preventDefault={handleSubmit}>
-	<label for="email">Email:</label>
-	<input type="email" id="email" bind:value={email} required />
-
-	<label for="password">Password:</label>
-	<input type="password" id="password" bind:value={password} required />
-
-	<label for="userType">User Type:</label>
-	<select id="userType" bind:value={usertype}>
-		<option value="0">Customer</option>
-		<option value="1">Merchant</option>
-		<option value="2">Tailor</option>
-	</select>
-
-	<button type="submit">Login</button>
-</form>
+<div class="bg-black flex justify-center items-center h-screen">
+	<form
+		class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-1/3"
+		on:submit|preventDefault={handleSubmit}
+	>
+		<div class="mb-4">
+			<label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email:</label>
+			<input
+				class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+				id="email"
+				type="email"
+				bind:value={email}
+				required
+			/>
+		</div>
+		<div class="mb-4">
+			<label class="block text-gray-700 text-sm font-bold mb-2" for="password">Password:</label>
+			<input
+				class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+				id="password"
+				type="password"
+				bind:value={password}
+				required
+			/>
+		</div>
+		<div class="mb-6">
+			<label class="block text-gray-700 text-sm font-bold mb-2" for="userType">What are you:</label>
+			<select
+				class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+				id="userType"
+				bind:value={usertype}
+			>
+				<option value={customer_id}>A Customer</option>
+				<option value={tailor_id}>A Tailor</option>
+				<option value={merchant_id}>A Merchant</option>
+			</select>
+		</div>
+		<div class="mb-4">
+			<button
+				class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full focus:outline-none focus:shadow-outline"
+				type="submit">Login</button
+			>
+		</div>
+	</form>
+</div>

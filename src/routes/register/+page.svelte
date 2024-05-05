@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { api_url } from '$lib/constants';
+	import { customer_id, tailor_id, merchant_id } from '$lib/constants';
 
 	let usertype: string,
 		postalcode: string,
@@ -66,39 +67,99 @@
 	}
 </script>
 
-<h1>Signup</h1>
+<div class="bg-black min-h-screen flex justify-center items-center">
+	<form
+		class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-1/3"
+		on:submit|preventDefault={handleSubmit}
+	>
+		<label class="block text-gray-700 text-sm font-bold mb-2" for="usertype">What are you:</label>
+		<select
+			class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-4"
+			id="usertype"
+			bind:value={usertype}
+		>
+			<option value={customer_id}>A Customer</option>
+			<option value={tailor_id}>A Tailor</option>
+			<option value={merchant_id}>A Merchant</option>
+		</select>
 
-<form on:submit|preventDefault={handleSubmit}>
-	<label for="usertype">User Type:</label>
-	<select id="usertype" bind:value={usertype}>
-		<option value="0">Customer</option>
-		<option value="1">Merchant</option>
-		<option value="2">Tailor</option>
-	</select>
+		<label class="block text-gray-700 text-sm font-bold mb-2" for="firstname">First Name:</label>
+		<input
+			class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-4"
+			type="text"
+			id="firstname"
+			bind:value={firstname}
+			required
+		/>
 
-	<label for="firstname">First Name:</label>
-	<input type="text" id="firstname" bind:value={firstname} required />
+		<label class="block text-gray-700 text-sm font-bold mb-2" for="lastname">Last Name:</label>
+		<input
+			class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-4"
+			type="text"
+			id="lastname"
+			bind:value={lastname}
+			required
+		/>
 
-	<label for="lastname">Last Name:</label>
-	<input type="text" id="lastname" bind:value={lastname} required />
+		<label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email:</label>
+		<input
+			class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-4"
+			type="email"
+			id="email"
+			bind:value={email}
+			required
+		/>
 
-	<label for="email">Email:</label>
-	<input type="email" id="email" bind:value={email} required />
+		<label class="block text-gray-700 text-sm font-bold mb-2" for="password">Password:</label>
+		<input
+			class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-4"
+			type="password"
+			id="password"
+			bind:value={password}
+			required
+		/>
 
-	<label for="password">Password:</label>
-	<input type="password" id="password" bind:value={password} required />
+		<label class="block text-gray-700 text-sm font-bold mb-2" for="streetaddress"
+			>Street Address:</label
+		>
+		<input
+			class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-4"
+			type="text"
+			id="streetaddress"
+			bind:value={streetaddress}
+			required
+		/>
 
-	<label for="streetaddress">Street Address:</label>
-	<input type="text" id="streetaddress" bind:value={streetaddress} required />
+		<label class="block text-gray-700 text-sm font-bold mb-2" for="city">City:</label>
+		<input
+			class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-4"
+			type="text"
+			id="city"
+			bind:value={city}
+			required
+		/>
 
-	<label for="city">City:</label>
-	<input type="text" id="city" bind:value={city} required />
+		<label class="block text-gray-700 text-sm font-bold mb-2" for="postalcode">Postal Code:</label>
+		<input
+			class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-4"
+			type="text"
+			id="postalcode"
+			bind:value={postalcode}
+			required
+		/>
 
-	<label for="postalcode">Postal Code:</label>
-	<input type="text" id="postalcode" bind:value={postalcode} required />
+		<label class="block text-gray-700 text-sm font-bold mb-2" for="state">State:</label>
+		<input
+			class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-6"
+			type="text"
+			id="state"
+			bind:value={state}
+			required
+		/>
 
-	<label for="state">State:</label>
-	<input type="text" id="state" bind:value={state} required />
-
-	<button type="submit">Sign Up</button>
-</form>
+		<button
+			class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full focus:outline-none focus:shadow-outline"
+			type="submit">Sign Up</button
+		>
+	</form>
+</div>
