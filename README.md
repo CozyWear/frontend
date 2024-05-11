@@ -2,16 +2,16 @@
 
 1. Make sure you've setup your github credentials with git
 2. Clone the repo, `git clone https://github.com/CozyWear/frontend`
-3. Install bun, find instructions here `https://bun.sh/`
-4. Install all dependencies, `bun install`
+3. Install nodejs, find instructions here `https://nodejs.org/en/download/`
+4. Install all dependencies, `npm install`
 
 # Running a Local Development Server
 
 ```bash
-bun run dev
+npm run dev
 
 # or start the server and open the app in a new browser tab
-bun run dev -- --open
+npm run dev -- --open
 ```
 
 # Building
@@ -19,7 +19,7 @@ bun run dev -- --open
 To create a production version of your app:
 
 ```bash
-bun run build
+npm run build
 ```
 
-You can preview the production build with `bun run preview`.
+You can preview the production build with `npm run preview`.
