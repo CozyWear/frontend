@@ -2,8 +2,9 @@
 
 1. Make sure you've setup your github credentials with git
 2. Clone the repo, `git clone https://github.com/CozyWear/frontend`
-3. Install nodejs (v18.17.1), find instructions for Windows (https://github.com/coreybutler/nvm-windows) for Linux (https://github.com/nvm-sh/nvm)
-4. Install all dependencies of the project, `npm install`
+3. cd into the directory
+4. Install nodejs (v18.17.1), using `https://github.com/Schniz/fnm` find instructions for your OS here (https://github.com/Schniz/fnm/blob/master/README.md) and do `fnm install`
+5. Install all dependencies of the project, `npm install`
 
 # Running a Local Development Server
 
