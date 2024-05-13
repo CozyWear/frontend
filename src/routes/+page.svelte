@@ -44,7 +44,7 @@
 		</div>
 	</nav>
 </div>
-<div class="container">
+
 	<div class="flex justify-around items-center text-white mt-1">
 		<div class="text-center">
 			<a href="#">
@@ -70,7 +70,7 @@
 		</div>
 	</div>
 
-	<div class="bg-cover bg-center h-96 mt-1 w-auto" style="background-image: url('ps1.jpg');"></div>
+	<div class="bg-cover bg-center h-96 mt-1 w-full" style="background-image: url('ps1.jpg');"></div>
 
 	<h1 class="text-center text-3xl font-semibold text-yellow-400 mt-8">Popular Combos</h1>
 	<div class="flex justify-center items-center h-96 pb-5">
@@ -99,7 +99,6 @@
 			<p class="mt-2 font-semibold text-yellow-400">PickUp & Delhivery</p>
 		</div>
 	</div>
-</div>
 
 <style>
 	.inputs {
