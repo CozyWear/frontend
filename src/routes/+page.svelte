@@ -29,10 +29,6 @@
 	</form>
 </Modal>
 
-<div class="button-container">
-	<button on:click={ToggleModal} class="buttons">Contact Us</button>
-</div>
-
 <div class="border">
 	<nav class="bg-white top-0 w-full bg-transparent p-2.5 z-10 shadow-xl h-24 ">
 		<div class="container mx-auto flex justify-between items-center h-full">
@@ -41,7 +37,7 @@
 				<li><a href="#" class="text-black text-sm">Home</a></li>
 				<li><a href="#" class="text-black text-sm">About Us</a></li>
 				<li><a href="#" class="text-black text-sm">Services</a></li>
-				<li><a href="#" class=" contact text-black text-sm">Contact Us</a></li>
+				<li><a href="#" class=" contact text-black text-sm" on:click={ToggleModal}>Contact Us</a></li>
 				<li><a href="#" id="Sign" class="text-yellow-400 text-sm">Sign In</a></li>
 				<li><a href="#" id="Sign" class="text-yellow-400 text-sm">Sign Up</a></li>
 			</ul>
@@ -53,7 +49,7 @@
 		<div class="text-center">
 			<a href="#">
 				<img
-					src="man-gentleman-black-suit-tie-white-45182272.webp"
+					src="men.jpg"
 					alt="Men"
 					class="w-16 h-16 mt-0.5 rounded-full"
 				/>
@@ -62,13 +58,13 @@
 		</div>
 		<div class="text-center">
 			<a href="#">
-				<img src="kids.webp" alt="Kids" class="w-16 h-16 mt-0.5 rounded-full" />
+				<img src="kid.jpg" alt="Kids" class="w-16 h-16 mt-0.5 rounded-full" />
 			</a>
 			<p class="font-semibold text-yellow-400 text-sm">Kids</p>
 		</div>
 		<div class="text-center">
 			<a href="#">
-				<img src="woman.webp" alt="Women" class="w-16 h-16 mt-0.5 rounded-full" />
+				<img src="woman.jpg" alt="Women" class="w-16 h-16 mt-0.5 rounded-full" />
 			</a>
 			<p class="font-semibold text-yellow-400 text-sm">Women</p>
 		</div>
