@@ -1,15 +1,26 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import Modal from '$lib/components/Modal.svelte';
 
 	let showModal = false;
 	const ToggleModal = () => {
 		showModal = !showModal;
 	};
+
+	onMount(() => {
+		let images = ['t1.jpg', 't2.jpg', 't3.jpg', 't4.jpg'];
+		let gallery = document.getElementById('combos')!;
+		for (var i = 0; i < images.length; i++) {
+			var img = document.createElement('img');
+			img.src = images[i];
+			img.className = 'h-auto w-56 pt-3.5 pl-5';
+			gallery.appendChild(img);
+		}
+	});
 </script>
 
 <Modal {showModal} on:click={ToggleModal}>
 	<h3>Contact Us</h3>
-
 	<form>
 		<input type="text" placeholder="Name" class="inputs" />
 		<br />
@@ -34,7 +45,7 @@
 	<nav class="bg-white top-0 w-full bg-transparent p-2.5 z-10 shadow-xl h-24">
 		<div class="container mx-auto flex justify-between items-center h-full">
 			<div class="flex items-center">
-				<a href="/"><img alt="logo" src="icon.jpg" class="w-auto h-12" /></a>
+				<a href="/"><img alt="logo" src="logo.jpg" class="w-auto h-12" /></a>
 				<div class="text-4xl font-bold text-yellow-400 ml-4">
 					<a href="/">CozyWear</a>
 				</div>
@@ -74,25 +85,6 @@
 	</div>
 </div>
 
-<h1 class="text-center text-3xl font-semibold text-yellow-400 mt-8" id="ser">Our Services</h1>
-<div class="grid grid-cols-4 gap-8 mt-4">
-	<div class="text-center">
-		<img src="fab.jpg" alt="Fabric Selection" class="w-64 mx-auto" />
-		<p class="mt-2 font-semibold text-yellow-400">Fabric Selection</p>
-	</div>
-	<div class="text-center">
-		<img src="ds.jpg" alt="Designer Consultation" class="w-64 mx-auto" />
-		<p class="mt-2 font-semibold text-yellow-400">Designer Consultation</p>
-	</div>
-	<div class="text-center">
-		<img src="exp.jpg" alt="Express Service" class="w-64 mx-auto" />
-		<p class="mt-2 font-semibold text-yellow-400">Express Service</p>
-	</div>
-	<div class="text-center">
-		<img src="p&d.jpg" alt="PickUp & Delhivery" class="w-64 mx-auto" />
-		<p class="mt-2 font-semibold text-yellow-400">PickUp & Delhivery</p>
-	</div>
-</div>
 <div
 	class="bg-cover bg-center h-96 mt-1 w-full flex items-end justify-center"
 	style="background-image: url('ps1.jpg');"
@@ -103,20 +95,7 @@
 </div>
 
 <h1 class="text-center text-3xl font-semibold text-yellow-400 mt-8">Popular Combos</h1>
-<div class="flex justify-center items-cent">
-	<div class="pc m-2.5">
-		<a href="#"><img src="t1.jpg" alt="Combo 1" class="h-auto w-60 pt-3.5 pl-5" /></a>
-	</div>
-	<div class="pc m-2.5">
-		<a href="#"><img src="t2.jpg" alt="Combo 2" class="h-auto w-60 pt-3.5 pl-5" /></a>
-	</div>
-	<div class="pc m-2.5">
-		<a href="#"><img src="t3.jpg" alt="Combo 3" class="h-auto w-60 pt-3.5 pl-5" /></a>
-	</div>
-	<div class="pc m-2.5">
-		<a href="#"><img src="t4.jpg" alt="Combo 4" class="h-auto w-60 pt-3.5 pl-5" /></a>
-	</div>
-</div>
+<div class="flex justify-center items-cent" id="combos"></div>
 
 <h1 class="text-center text-3xl font-semibold text-yellow-400 mt-2" id="ser">Our Services</h1>
 <div class="flex justify-center items-cent mt-4 mb-4">
