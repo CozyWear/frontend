@@ -42,7 +42,7 @@
 	/>
 </svelte:head>
 
-<div class="bg-black flex justify-center items-center h-screen">
+<div class="bg-[#d7ab99] flex justify-center items-center h-screen">
 	<form
 		class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-1/3"
 		on:submit|preventDefault={handleSubmit}
