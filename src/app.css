@@ -3,3 +3,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    @font-face {
+        font-family: "Sweaty";
+        src: url('C:\Users\harya\frontend\src\routes\Sweaty-beta.otf');
+    }
+}
