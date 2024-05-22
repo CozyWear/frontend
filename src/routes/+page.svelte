@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import Modal from '$lib/components/Modal.svelte';
+	import Navbar from '$lib/components/NavBar.svelte';
+
 	let name = '';
 	let email = '';
 	let nameError = '';
@@ -76,7 +78,7 @@
 			<div class="flex items-center">
 				<a href="/"><img alt="logo" src="logo.jpg" class="w-auto h-12" /></a>
 				<div class="text-4xl font-bold ml-4" style="color: #e1b42f;">
-					<a href="/" style="font-family: Great Vibes;">CozyWear</a>
+					<a href="/" style="font-family: Sweaty;">CozyWear</a>
 				</div>
 			</div>
 			<ul class="flex space-x-4">
