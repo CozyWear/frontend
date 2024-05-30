@@ -42,6 +42,11 @@
 	onMount(() => {
 		togglePasswordVisibility();
 	});
+
+	let showModal = false;
+	const ToggleModal = () => {
+		showModal = !showModal;
+	};
 </script>
 
 <svelte:head>
@@ -52,9 +57,37 @@
 	/>
 </svelte:head>
 
-<div class="bg-[#d7ab99] flex justify-center items-center h-screen">
+<div class="border">
+	<nav class="bg-white top-0 w-full bg-transparent p-2.5 z-10 shadow-xl h-24">
+		<div class="container mx-auto flex justify-between items-center h-full">
+			<div class="flex items-center">
+				<a href="/"><img alt="logo" src="logo.jpg" class="w-auto h-12" /></a>
+				<div class="text-4xl font-bold ml-4" style="color: #e1b42f;">
+					<a href="/" style="font-family: Sweaty;">CozyWear</a>
+				</div>
+			</div>
+			<ul class="flex space-x-4">
+				<li><a href="/" class="text-black text-sm">Home</a></li>
+				<li><a href="/aboutus" class="text-black text-sm">About Us</a></li>
+				<li><a href="#" class="text-black text-sm">Services</a></li>
+				<li>
+					<a href="#" class="contact text-black text-sm" on:click={ToggleModal}>Contact Us</a>
+				</li>
+				<li><a href="/login" id="Sign" class=" text-sm" style="color: #e1b42f;">Login</a></li>
+				<li>
+					<a href="/register" id="Sign" class=" text-sm" style="color: #e1b42f;">Register</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+</div>
+
+<div class="bg-[#fcefb4] flex flex-col justify-between items-center py-10">
+	<header class="py-4">
+		<h1 class="text-3xl font-bold text-center">Login</h1>
+	</header>
 	<form
-		class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-1/3"
+		class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-1/3 mt-10"
 		on:submit|preventDefault={handleSubmit}
 	>
 		<div class="mb-4">
@@ -140,3 +173,36 @@
 		</div>
 	</form>
 </div>
+
+<footer class="bg-gray-800 text-white py-8">
+	<div class="container mx-auto px-4">
+		<div class="flex ml-44">
+			<div class="w-full lg:w-1/3 px-4 mb-4 lg:mb-0">
+				<h2 class="text-2xl font-semibold mb-2" style="color: #e1b42f;">CozyWear</h2>
+				<ul class="list-none">
+					<li><a href="/aboutus" class="hover:text-gray-400">About Us</a></li>
+					<li><a href="#" class="hover:text-gray-400" on:click={ToggleModal}>Contact Us</a></li>
+					<li><a href="/privacy-policy" class="hover:text-gray-400">Privacy Policy</a></li>
+				</ul>
+			</div>
+			<div class="w-full lg:w-1/3 px-4 mb-4 lg:mb-0">
+				<h2 class="text-lg font-semibold mb-4">Support</h2>
+				<ul class="list-none">
+					<li><a href="/customer/order/" class="hover:text-gray-400">Place an Order</a></li>
+					<li><a href="/customer/pricing" class="hover:text-gray-400">Pricing</a></li>
+				</ul>
+			</div>
+			<div class="w-full lg:w-1/3 px-4 mb-4 lg:mb-0">
+				<h2 class="text-lg font-semibold mb-4">Follow Us</h2>
+				<ul class="list-none">
+					<li><a href="#" class="hover:text-gray-400">Facebook</a></li>
+					<li><a href="#" class="hover:text-gray-400">Twitter</a></li>
+					<li><a href="#" class="hover:text-gray-400">Instagram</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<p class="text-white-600 text-sm flex justify-center">
+		&copy; 2024 CozyWear. All rights reserved.
+	</p>
+</footer>

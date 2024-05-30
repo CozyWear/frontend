@@ -178,6 +178,9 @@
 			</div>
 		</div>
 	</div>
+	<p class="text-white-600 text-sm flex justify-center">
+		&copy; 2024 CozyWear. All rights reserved.
+	</p>
 </footer>
 
 <style>
