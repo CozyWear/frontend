@@ -69,7 +69,7 @@
 				img.src = trendingImg[i % trendingImg.length];
 				img.className = 'h-auto w-56 pt-3.5 pl-5 rounded-3xl';
 				img.addEventListener('click', () => {
-					displayPopup(img.src, 'Dynamic Title', 'Dynamic Description');
+					displayPopup(img.src, 'Title', 'Description');
 				});
 				container.appendChild(img);
 			}
@@ -96,7 +96,7 @@
 				img.src = men[i % men.length];
 				img.className = 'h-auto w-56 pt-3.5 pl-5 rounded-3xl';
 				img.addEventListener('click', () => {
-					displayPopup(img.src, 'Dynamic Title', 'Dynamic Description');
+					displayPopup(img.src, 'Title', 'Description');
 				});
 				container.appendChild(img);
 			}
@@ -123,7 +123,7 @@
 				img.src = kid[i % kid.length];
 				img.className = 'h-auto w-56 pt-3.5 pl-5 rounded-3xl';
 				img.addEventListener('click', () => {
-					displayPopup(img.src, 'Dynamic Title', 'Dynamic Description');
+					displayPopup(img.src, 'Title', 'Description');
 				});
 				container.appendChild(img);
 			}
@@ -151,7 +151,7 @@
 				img.src = women[i % women.length];
 				img.className = 'h-auto w-56 pt-3.5 pl-5 rounded-3xl';
 				img.addEventListener('click', () => {
-					displayPopup(img.src, 'Dynamic Title', 'Dynamic Description');
+					displayPopup(img.src, 'Title', 'Description');
 				});
 				container.appendChild(img);
 			}
