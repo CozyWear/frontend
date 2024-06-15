@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import Modal from '$lib/components/Modal.svelte';
-	import Navbar from '$lib/components/NavBar.svelte';
+	import Footer from '$lib/components/Footer.svelte';
+	import NavBar from '$lib/components/NavBar.svelte';
 
 	let name = '';
 	let email = '';
@@ -38,7 +39,7 @@
 
 	onMount(() => {
 		let images = ['t1.jpg', 't2.jpg', 't3.jpg', 't4.jpg'];
-		let gallery = document.getElementById('combos')!;
+		let gallery = document.getElementById('combos');
 		for (var i = 0; i < images.length; i++) {
 			var img = document.createElement('img');
 			img.src = images[i];
@@ -72,29 +73,7 @@
 	</form>
 </Modal>
 
-<div class="border">
-	<nav class="bg-white top-0 w-full bg-transparent p-2.5 z-10 shadow-xl h-24">
-		<div class="container mx-auto flex justify-between items-center h-full">
-			<div class="flex items-center">
-				<a href="/"><img alt="logo" src="logo.jpg" class="w-auto h-12" /></a>
-				<div class="text-4xl font-bold ml-4" style="color: #e1b42f;">
-					<a href="/" style="font-family: Sweaty;">CozyWear</a>
-				</div>
-			</div>
-			<ul class="flex space-x-4">
-				<li><a href="/" class="text-black text-sm">Home</a></li>
-				<li><a href="/aboutus" class="text-black text-sm">About Us</a></li>
-				<li><a href="#" class="text-black text-sm">Services</a></li>
-				<li>
-					<a href="#" class="contact text-black text-sm" on:click={ToggleModal}>Contact Us</a>
-				</li>
-				<li><a href="/login" id="Sign" class=" text-sm" style="color: #e1b42f;">Login</a></li>
-				<li><a href="/register" id="Sign" class=" text-sm" style="color: #e1b42f;">Register</a></li>
-			</ul>
-		</div>
-	</nav>
-</div>
-
+<NavBar />
 <div class="flex justify-around items-center text-white mt-1">
 	<div class="text-center">
 		<a href="/category/men/">
@@ -125,12 +104,24 @@
 	>
 </div>
 
-<h1 class="text-center text-3xl font-semibol dmt-8" style="color: #e1b42f;">Popular Combos</h1>
-<div class="flex justify-center items-cent" id="combos"></div>
+<h1 class="text-center text-3xl font-semibold dmt-8" style="color: #e1b42f;padding-top:15px">
+	Popular Combos
+</h1>
+<p style="text-align: center; font-weight:250; padding: 15px 20px; font-size:16px;">
+	In today's fast-paced world, convenience is key. At CozyWear, our popular combos are designed to <br
+	/>
+	provide you with stylish and coordinated outfits, all from the comfort of your home. <br />
+</p>
+<div class="flex justify-center items-cent" id="combos" style="padding: 15px 15px;"></div>
 
 <h1 class="text-center text-3xl font-semibold mt-2" id="ser" style="color: #e1b42f;">
 	Our Services
 </h1>
+<p style="text-align: center; font-weight:250; padding: 15px 20px; font-size:16px;">
+	With the rapid advancement of technology, it's essential to establish an online presence.<br />
+	At CozyWear, we offer convenient tailoring services that <br />
+	you can enjoy from the comfort of your home.
+</p>
 <div class="flex justify-center items-cent mt-4 mb-4">
 	<div class="text-center">
 		<img src="fab.jpg" alt="Fabric Selection" class="h-auto w-60 pt-3.5 pl-5 m-2.5" />
@@ -149,39 +140,7 @@
 		<p class="mt-2 font-semibold" style="color: #e1b42f;">PickUp & Delhivery</p>
 	</div>
 </div>
-
-<footer class="bg-gray-800 text-white py-8">
-	<div class="container mx-auto px-4">
-		<div class="flex ml-44">
-			<div class="w-full lg:w-1/3 px-4 mb-4 lg:mb-0">
-				<h2 class="text-2xl font-semibold mb-2" style="color: #e1b42f;">CozyWear</h2>
-				<ul class="list-none">
-					<li><a href="/aboutus" class="hover:text-gray-400">About Us</a></li>
-					<li><a href="#" class="hover:text-gray-400" on:click={ToggleModal}>Contact Us</a></li>
-					<li><a href="/privacy-policy" class="hover:text-gray-400">Privacy Policy</a></li>
-				</ul>
-			</div>
-			<div class="w-full lg:w-1/3 px-4 mb-4 lg:mb-0">
-				<h2 class="text-lg font-semibold mb-4">Support</h2>
-				<ul class="list-none">
-					<li><a href="/customer/order/" class="hover:text-gray-400">Place an Order</a></li>
-					<li><a href="/customer/pricing" class="hover:text-gray-400">Pricing</a></li>
-				</ul>
-			</div>
-			<div class="w-full lg:w-1/3 px-4 mb-4 lg:mb-0">
-				<h2 class="text-lg font-semibold mb-4">Follow Us</h2>
-				<ul class="list-none">
-					<li><a href="#" class="hover:text-gray-400">Facebook</a></li>
-					<li><a href="#" class="hover:text-gray-400">Twitter</a></li>
-					<li><a href="#" class="hover:text-gray-400">Instagram</a></li>
-				</ul>
-			</div>
-		</div>
-	</div>
-	<p class="text-white-600 text-sm flex justify-center">
-		&copy; 2024 CozyWear. All rights reserved.
-	</p>
-</footer>
+<Footer />
 
 <style>
 	.inputs {
