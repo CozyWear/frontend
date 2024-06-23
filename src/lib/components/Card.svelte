@@ -1,5 +1,5 @@
 <div class="card">
-	<img src="static\fabric.jpg" alt="fabric Image" class="fabric-image" />
+	<img src="fabric.jpg" alt="fabric Image" class="fabric-image" />
 	<div class="input-group">
 		<label>Design Name:</label>
 		<input type="text" />
