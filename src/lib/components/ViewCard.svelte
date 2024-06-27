@@ -1,21 +1,27 @@
+<script context="module" lang="ts">
+	export type ViewAttribute = {
+		name: string;
+	};
+
+	type Image = {
+		url: string;
+		name: string;
+	};
+</script>
+
+<script lang="ts">
+	export let attributes: ViewAttribute[];
+	export let image: Image;
+</script>
+
 <div class="card">
-	<img src="fabric.jpg" alt="fabric Image" class="fabric-image" />
-	<div class="input-group">
-		<label>Design Name:</label>
-		<input type="text" />
-	</div>
-	<div class="input-group">
-		<label>Material required:</label>
-		<input type="text" />
-	</div>
-	<div class="input-group">
-		<label>Range of sizes:</label>
-		<input type="text" />
-	</div>
-	<div class="input-group">
-		<label>Cost of sewing:</label>
-		<input type="text" />
-	</div>
+	<img src={image.url} alt={image.name} class="fabric-image" />
+	{#each attributes as attribute}
+		<div class="input-group">
+			<label>{attribute.name}:</label>
+			<input type="" />
+		</div>
+	{/each}
 </div>
 
 <style>

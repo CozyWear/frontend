@@ -1,9 +1,17 @@
 <script lang="ts">
+	// BUG: Going forth and back from Add & View adds a new card each time
 	import { onMount, afterUpdate } from 'svelte';
 	import NavBar from '$lib/components/NavBar.svelte';
-	import Footer from '$lib/components/Footer.svelte';
-	import Card from '$lib/components/Card.svelte';
+	import ViewCard from '$lib/components/ViewCard.svelte';
 	import Sidebar from '$lib/components/Sidebar.svelte';
+	import type { ViewAttribute } from '$lib/components/ViewCard.svelte';
+
+	const attributes: ViewAttribute[] = [
+		{ name: 'Design Name' },
+		{ name: 'Material Required' },
+		{ name: 'Range of Sizes' },
+		{ name: 'Cost Of Sewing' }
+	];
 
 	let showModal = false;
 	const ToggleModal = () => {
@@ -53,7 +61,8 @@
 
 		<div class="main-content">
 			{#each cards as card}
-				<Card />
+				{@const image = { url: 'fabric.jpg', name: '' }}
+				<ViewCard {attributes} {image} />
 			{/each}
 		</div>
 	</div>
