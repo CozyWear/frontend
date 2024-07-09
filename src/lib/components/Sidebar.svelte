@@ -61,7 +61,7 @@
 	.sidebar-container {
 		position: relative;
 		width: 250px;
-		background-color: #1c1c1c;
+		background-color: #292827;
 		color: #fff;
 		padding: 16px;
 		z-index: 900;
@@ -93,6 +93,6 @@
 	.sidebar-item.active,
 	.sidebar-item.selected {
 		background-color: #444;
-		box-shadow: 0 0 0 2px #fff;
+		box-shadow: 0 0 0 1px #f5f8f6;
 	}
 </style>
