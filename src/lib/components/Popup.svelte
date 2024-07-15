@@ -4,8 +4,10 @@
 
 	export let show = false;
 	export let imageSrc = '';
-	export let title = '';
-	export let description = '';
+	export let material_type = '';
+	export let size = '';
+	export let name = '';
+	export let fit = '';
 
 	const close = () => {
 		show = false;
@@ -20,8 +22,16 @@
 				<img class="popup-image" src={imageSrc} alt="Popup Image" />
 			</div>
 			<div class="popup-data">
-				<h2 class="popup-title">{title}</h2>
-				<p>{description}</p>
+				<h2 class="popup-title">Material Type: {material_type}</h2>
+				<div class="size">
+					<p>Select Size: {size}</p>
+					<button> S</button>
+					<button> M</button>
+					<button> L</button>
+				</div>
+				<p>Name: {name}</p>
+				<p>Fit: {fit}</p>
+				<button class="btn">Customize</button>
 			</div>
 		</div>
 	</div>
@@ -58,11 +68,23 @@
 		flex-basis: 50%;
 		display: flex;
 		flex-direction: column;
-		justify-content: center;
 		padding: 20px;
+		margin-top: 20px;
 	}
 	.popup-title {
 		color: #e1b42f;
 		margin-bottom: 10px;
+	}
+	.btn {
+		background-color: #e1b42f;
+		width: 100px;
+		font-weight: bold;
+		color: white;
+		margin-top: auto;
+		border-radius: 8px;
+	}
+	.size {
+		display: flex;
+		flex-direction: row;
 	}
 </style>

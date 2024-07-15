@@ -13,53 +13,26 @@
 	let kidIndex = 0;
 	let womenIndex = 0;
 	let menIndex = 0;
-	let currentIndex = 0;
-	const interval = 4000;
-	const totalImages = images.length;
 	let trendingIndex = 0;
 
 	let showPopup = false;
 	let popupImageSrc = '';
-	let popupTitle = '';
-	let popupDescription = '';
+	let popupMaterial = '';
+	let popupName = '';
+	let popupFit = '';
 
-	function displayPopup(imageSrc: string, title: string, description: string) {
-		console.log('Displaying popup with', imageSrc, title, description);
+	function displayPopup(imageSrc: string, material_type: string, name: string, fit: string) {
+		console.log('Displaying popup with', imageSrc, material_type, name, fit);
 		popupImageSrc = imageSrc;
-		popupTitle = title;
-		popupDescription = description;
+		popupMaterial = material_type;
+		popupName = name;
+		popupFit = fit;
 		showPopup = true;
 	}
-	//Slide Show
-	onMount(() => {
-		const gallery = document.getElementById('slide');
 
-		const slideShow = () => {
-			gallery.style.opacity = 0;
-			gallery.style.filter = 'brightness(80%)';
-
-			setTimeout(() => {
-				gallery.style.backgroundImage = `url(${images[currentIndex]})`;
-				gallery.style.opacity = 1;
-				currentIndex = (currentIndex + 1) % totalImages;
-			}, 500);
-
-			setTimeout(() => {
-				gallery.style.opacity = 0;
-			}, interval - 100);
-		};
-
-		slideShow();
-
-		const inter = setInterval(slideShow, interval);
-
-		return () => {
-			clearInterval(inter);
-		};
-	});
 	//Trending Slide show
 	onMount(() => {
-		const container = document.getElementById('combos');
+		const container = document.getElementById('trending');
 
 		const createImage = () => {
 			container.innerHTML = '';
@@ -69,7 +42,7 @@
 				img.src = trendingImg[i % trendingImg.length];
 				img.className = 'h-auto w-56 pt-3.5 pl-5 rounded-3xl';
 				img.addEventListener('click', () => {
-					displayPopup(img.src, 'Title', 'Description');
+					displayPopup(img.src, 'Title', 'dfs', 'dfs');
 				});
 				container.appendChild(img);
 			}
@@ -82,7 +55,20 @@
 			createImage();
 		};
 
-		const trendingInterval = setInterval(cycleImg, 4000);
+		const TleftArrow = document.getElementById('TleftArrow');
+		const TrightArrow = document.getElementById('TrightArrow');
+
+		TleftArrow.addEventListener('click', () => {
+			trendingIndex = (trendingIndex - 1 + trendingImg.length) % trendingImg.length;
+			createImage();
+		});
+
+		TrightArrow.addEventListener('click', () => {
+			trendingIndex = (trendingIndex + 1) % trendingImg.length;
+			createImage();
+		});
+
+		//const trendingInterval = setInterval(cycleImg, 4000);
 	});
 	//Men Slide Show
 	onMount(() => {
@@ -94,9 +80,9 @@
 			for (let i = menIndex; i < menIndex + 4; i++) {
 				const img = document.createElement('img');
 				img.src = men[i % men.length];
-				img.className = 'h-auto w-56 pt-3.5 pl-5 rounded-3xl';
+				img.className = 'h-auto w-56 pt-3.5 pl-5';
 				img.addEventListener('click', () => {
-					displayPopup(img.src, 'Title', 'Description');
+					displayPopup(img.src, 'Title', 'Description', 'dfs', 'dfs');
 				});
 				container.appendChild(img);
 			}
@@ -108,8 +94,20 @@
 			menIndex = (menIndex + 1) % men.length;
 			createImage();
 		};
+		const MleftArrow = document.getElementById('MleftArrow');
+		const MrightArrow = document.getElementById('MrightArrow');
 
-		const menInterval = setInterval(cycleImg, 4000);
+		MleftArrow.addEventListener('click', () => {
+			menIndex = (menIndex - 1 + men.length) % men.length;
+			createImage();
+		});
+
+		MrightArrow.addEventListener('click', () => {
+			menIndex = (menIndex + 1) % men.length;
+			createImage();
+		});
+
+		//const menInterval = setInterval(cycleImg, 4000);
 	});
 	//Kid Slide Show
 	onMount(() => {
@@ -123,7 +121,7 @@
 				img.src = kid[i % kid.length];
 				img.className = 'h-auto w-56 pt-3.5 pl-5 rounded-3xl';
 				img.addEventListener('click', () => {
-					displayPopup(img.src, 'Title', 'Description');
+					displayPopup(img.src, 'Title', 'Description', 'dfs', 'dfs');
 				});
 				container.appendChild(img);
 			}
@@ -136,7 +134,20 @@
 			createImage();
 		};
 
-		const kidInterval = setInterval(cycleImg, 4000);
+		const KleftArrow = document.getElementById('KleftArrow');
+		const KrightArrow = document.getElementById('KrightArrow');
+
+		KleftArrow.addEventListener('click', () => {
+			kidIndex = (kidIndex - 1 + kid.length) % kid.length;
+			createImage();
+		});
+
+		KrightArrow.addEventListener('click', () => {
+			kidIndex = (kidIndex + 1) % kid.length;
+			createImage();
+		});
+
+		//const kidInterval = setInterval(cycleImg, 4000);
 	});
 
 	//Women Slide Show
@@ -151,7 +162,7 @@
 				img.src = women[i % women.length];
 				img.className = 'h-auto w-56 pt-3.5 pl-5 rounded-3xl';
 				img.addEventListener('click', () => {
-					displayPopup(img.src, 'Title', 'Description');
+					displayPopup(img.src, 'Title', 'Description', 'dfs', 'dfs');
 				});
 				container.appendChild(img);
 			}
@@ -164,7 +175,20 @@
 			createImage();
 		};
 
-		const womenInterval = setInterval(cycleImg, 4000);
+		const WleftArrow = document.getElementById('WleftArrow');
+		const WrightArrow = document.getElementById('WrightArrow');
+
+		WleftArrow.addEventListener('click', () => {
+			womenIndex = (womenIndex - 1 + women.length) % women.length;
+			createImage();
+		});
+
+		WrightArrow.addEventListener('click', () => {
+			womenIndex = (womenIndex + 1) % women.length;
+			createImage();
+		});
+
+		//const womenInterval = setInterval(cycleImg, 4000);
 	});
 </script>
 
@@ -172,8 +196,7 @@
 
 <div
 	class="bg-cover bg-center h-96 mt-1 w-full flex items-end justify-center"
-	style="margin: 0; transition: opacity 0.5s ease;"
-	id="slide"
+	style="background-image: url('ps1.jpg');"
 >
 	<button
 		style="background-color: #e1b42f; margin-bottom: 20px; padding: 8px 12px; font-weight: bold;"
@@ -186,26 +209,43 @@
 <h1 class="text-center text-3xl font-semibold mt-8" style="color: #e1b42f; padding-top: 15px;">
 	Trending
 </h1>
-<div class="flex justify-center items-center" id="combos" style="padding: 15px 15px;"></div>
+<div class="flex justify-center items-center">
+	<button id="TleftArrow">←</button>
+	<div class="flex justify-center items-center" id="trending" style="padding: 15px 15px;"></div>
+	<button id="TrightArrow">→</button>
+</div>
 
 <h1 class="text-center text-3xl font-semibold mt-8" style="color: #e1b42f; padding-top: 15px;">
 	Men
 </h1>
-<div class="flex justify-center items-center" id="men" style="padding: 15px 15px;"></div>
+<div class="flex justify-center items-center">
+	<button id="MleftArrow">←</button>
+	<div class="flex justify-center items-center" id="men" style="padding: 15px 15px;"></div>
+	<button id="MrightArrow">→</button>
+</div>
 <h1 class="text-center text-3xl font-semibold mt-8" style="color: #e1b42f; padding-top: 15px;">
 	Kids
 </h1>
-<div class="flex justify-center items-center" id="kid" style="padding: 15px 15px;"></div>
+<div class="flex justify-center items-center">
+	<button id="KleftArrow">←</button>
+	<div class="flex justify-center items-center" id="kid" style="padding: 15px 15px;"></div>
+	<button id="KrightArrow">→</button>
+</div>
 <h1 class="text-center text-3xl font-semibold mt-8" style="color: #e1b42f; padding-top: 15px;">
 	Women
 </h1>
-<div class="flex justify-center items-center" id="women" style="padding: 15px 15px;"></div>
+<div class="flex justify-center items-center">
+	<button id="WleftArrow">←</button>
+	<div class="flex justify-center items-center" id="women" style="padding: 15px 15px;"></div>
+	<button id="WrightArrow">→</button>
+</div>
 
 <Popup
 	bind:show={showPopup}
 	imageSrc={popupImageSrc}
-	title={popupTitle}
-	description={popupDescription}
+	material_type={popupMaterial}
+	name={popupName}
+	fit={popupFit}
 	on:close={() => (showPopup = false)}
 />
 
