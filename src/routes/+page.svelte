@@ -4,39 +4,6 @@
 	import Footer from '$lib/components/Footer.svelte';
 	import NavBar from '$lib/components/NavBar.svelte';
 
-	let name = '';
-	let email = '';
-	let nameError = '';
-	let emailError = '';
-
-	let showModal = false;
-	const ToggleModal = () => {
-		showModal = !showModal;
-	};
-
-	const validateForm = () => {
-		let isValid = true;
-
-		if (name.trim() === '') {
-			nameError = 'Name is required';
-			isValid = false;
-		} else {
-			nameError = '';
-		}
-
-		if (email.trim() === '') {
-			emailError = 'Email is required';
-			isValid = false;
-		} else if (!/\S+@\S+\.\S+/.test(email)) {
-			emailError = 'Invalid email address';
-			isValid = false;
-		} else {
-			emailError = '';
-		}
-
-		return isValid;
-	};
-
 	onMount(() => {
 		let images = ['t1.jpg', 't2.jpg', 't3.jpg', 't4.jpg'];
 		let gallery = document.getElementById('combos');
@@ -48,30 +15,6 @@
 		}
 	});
 </script>
-
-<Modal {showModal} on:click={ToggleModal}>
-	<h3 style="color: #e1b42f;">Contact Us</h3>
-	<form on:submit|preventDefault={validateForm}>
-		<input type="text" placeholder="Name" class="inputs" bind:value={name} />
-		<br />
-		<span id="nameError" style="color: red;">{nameError}</span>
-		<input type="text" placeholder="Email" class="inputs" bind:value={email} />
-		<br />
-		<span id="emailError" style="color: red;">{emailError}</span>
-		<select
-			style="width: 80%; margin:5% auto; border:1px solid ; padding:12px 8px; border-radius:10px; background-color: #fefefe;"
-		>
-			<option value="Customer">Customer</option>
-			<option value="Merchant">Merchant</option>
-			<option value="Tailor">Tailor</option>
-		</select>
-		<br />
-		<textarea name="Feedback" style="width: 80%; margin:5%;" placeholder="Enter Your Feedback Here"
-		></textarea>
-		<br />
-		<button style="background-color: #e1b42f; color: white; border-radius: 10px">Submit</button>
-	</form>
-</Modal>
 
 <NavBar />
 <div class="flex justify-around items-center text-white mt-1">
@@ -137,7 +80,7 @@
 	</div>
 	<div class="text-center">
 		<img src="p&d.jpg" alt="PickUp & Delhivery" class="h-auto w-60 pt-3.5 pl-5 m-2.5" />
-		<p class="mt-2 font-semibold" style="color: #e1b42f;">PickUp & Delhivery</p>
+		<p class="mt-2 font-semibold" style="color: #e1b42f;">PickUp & Delivery</p>
 	</div>
 </div>
 <Footer />
