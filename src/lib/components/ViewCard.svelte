@@ -10,24 +10,63 @@
 </script>
 
 <script lang="ts">
+	import { writable } from 'svelte/store';
+
 	export let attributes: ViewAttribute[];
 	export let image: Image;
+	export let onDelete: () => void; // onDelete function declared as a prop
+
+	let isEditing = writable(false);
+	let inputValues: string[] = []; // values take from API
+
+	function toggleEdit() {
+		isEditing.update((value) => !value);
+	}
+
+	function handleSave() {
+		attributes.forEach((attribute, index) => {
+			attribute.name = inputValues[index] || ''; // Update attribute name with input value or empty string
+		});
+		toggleEdit(); // Exit edit mode after saving
+	}
+
+	function handleDelete() {
+		inputValues = []; // Clear all input values
+		attributes.forEach((attribute) => {
+			attribute.name = ''; // Clear attribute names
+		});
+		onDelete();
+	}
 </script>
 
 <div class="card">
 	<img src={image.url} alt={image.name} class="fabric-image" />
-	{#each attributes as attribute}
+	{#each attributes as attribute, index}
 		<div class="input-group">
 			<label>{attribute.name}:</label>
-			<input type="" />
+			{#if $isEditing}
+				<input type="text" bind:value={inputValues[index]} />
+			{:else}
+				<span>{inputValues[index]}</span>
+			{/if}
 		</div>
 	{/each}
+	<div class="button-group">
+		<button on:click={toggleEdit} class="edit-button">
+			{#if $isEditing}
+				Save
+			{:else}
+				Edit
+			{/if}
+		</button>
+		<button on:click={handleDelete} class="delete-button">Delete</button>
+	</div>
 </div>
 
 <style>
 	.card {
 		width: 300px;
-		height: 350px;
+		max-height: 600px;
 		padding: 16px;
 		margin: 30px;
 		border: 1px solid #ccc;
@@ -61,7 +100,8 @@
 		font-size: 12px;
 	}
 
-	.input-group input {
+	.input-group input,
+	.input-group span {
 		flex: 1.5;
 		font-size: 12px;
 		padding: 4px;
@@ -71,5 +111,24 @@
 		background-color: #f8f9fa;
 		box-sizing: border-box;
 		width: 100%;
+	}
+
+	.button-group {
+		display: flex;
+		justify-content: space-between;
+		margin-top: 10px;
+	}
+
+	.edit-button,
+	.delete-button {
+		flex: 1;
+		padding: 8px 10px;
+		border: none;
+		border-radius: 12px;
+		cursor: pointer;
+		font-size: 14px;
+		margin: 0 5px;
+		background-color: #e0aa3e;
+		color: white;
 	}
 </style>

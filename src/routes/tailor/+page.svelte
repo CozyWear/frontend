@@ -1,16 +1,16 @@
 <script lang="ts">
 	// BUG: Going forth and back from Add & View adds a new card each time
-	import { onMount, afterUpdate } from 'svelte';
 	import NavBar from '$lib/components/NavBar.svelte';
 	import ViewCard from '$lib/components/ViewCard.svelte';
-	import Sidebar from '$lib/components/Sidebar.svelte';
 	import type { ViewAttribute } from '$lib/components/ViewCard.svelte';
 
 	const attributes: ViewAttribute[] = [
-		{ name: 'Design Name' },
-		{ name: 'Material Required' },
-		{ name: 'Range of Sizes' },
-		{ name: 'Cost Of Sewing' }
+		{ name: 'Style Name' },
+		{ name: 'Size' },
+		{ name: 'Style Type' },
+		{ name: 'Material Type' },
+		{ name: 'Fit Type' },
+		{ name: 'Cost Per Unit' }
 	];
 
 	let showModal = false;
@@ -19,47 +19,14 @@
 	};
 
 	let cards = [{}, {}, {}];
-
-	function handleAdd() {
-		cards = [...cards, {}];
-		updateSidebarHeight();
-	}
-
-	function handleRemove() {
-		if (cards.length > 1) {
-			cards.pop();
-			cards = [...cards];
-			updateSidebarHeight();
-		}
-	}
-
-	function updateSidebarHeight() {
-		const cardHeight = 350 + 70; // Card height plus *margin plus 2*padding
-		const rows = Math.ceil(cards.length / 3);
-		const contentHeight = rows * cardHeight;
-		const navbarHeight = document.querySelector('header')?.offsetHeight || 0;
-		const footerHeight = document.querySelector('footer')?.offsetHeight || 0;
-		const availableHeight = window.innerHeight - navbarHeight - footerHeight;
-		const newSidebarHeight = Math.max(contentHeight, availableHeight);
-		document.querySelector('.sidebar-container').style.height = `${newSidebarHeight}px`;
-	}
-
-	onMount(() => {
-		updateSidebarHeight();
-	});
-
-	afterUpdate(() => {
-		updateSidebarHeight();
-	});
 </script>
 
 <div class="page-container">
 	<NavBar />
 
 	<div class="content-wrapper">
-		<Sidebar on:add={handleAdd} on:remove={handleRemove} />
-
 		<div class="main-content">
+			<a id="add-button" href="/tailor/add-item">+</a>
 			{#each cards as card}
 				{@const image = { url: 'fabric.jpg', name: '' }}
 				<ViewCard {attributes} {image} />
@@ -86,5 +53,27 @@
 		display: inline-flex;
 		flex-wrap: wrap;
 		padding: 5px;
+	}
+
+	#add-button {
+		width: 73px;
+		height: 72px;
+		margin: 80px 30px 0 60px;
+		position: fixed;
+		bottom: 30px;
+		right: 10px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 10px;
+		background: #e1b42f;
+		font-size: 50px;
+		padding: auto;
+		color: white;
+		cursor: pointer;
+	}
+
+	#add-button:hover {
+		box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 	}
 </style>

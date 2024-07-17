@@ -12,7 +12,7 @@
 <nav class="bg-white top-0 w-full bg-transparent p-2.5 z-10 shadow-xl h-24">
 	<div class="container mx-auto flex justify-between items-center h-full">
 		<div class="flex items-center">
-			<a href="/"><img alt="logo" src="logo.jpg" class="w-auto h-12" /></a>
+			<a href="/"><img alt="logo" src="/logo.jpg" class="w-auto h-12" /></a>
 			<div class="text-4xl font-bold ml-4" style="color: #e1b42f;">
 				<a href="/" style="font-family: Sweaty;">CozyWear</a>
 			</div>
