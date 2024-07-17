@@ -1,4 +1,5 @@
 <script>
+	import { onMount } from 'svelte';
 	import { createEventDispatcher } from 'svelte';
 	const dispatch = createEventDispatcher();
 
@@ -8,10 +9,23 @@
 	export let name = '';
 	export let fit = '';
 
+	let customizeButton;
+
 	const close = () => {
 		show = false;
 		dispatch('close');
 	};
+
+	const selectImage = () => {
+		dispatch('imageSelected', { src: imageSrc });
+		close();
+	};
+
+	onMount(() => {
+		customizeButton.addEventListener('click', () => {
+			window.location.href = 'cozywear.pages.dev/customize'; // Add the actual URL you want to navigate to
+		});
+	});
 </script>
 
 {#if show}
@@ -24,7 +38,7 @@
 				<h2 class="popup-title">Design: {Design}</h2>
 				<p>Name: {name}</p>
 				<p>Fit Type: {fit}</p>
-				<button class="btn">Customize</button>
+				<button class="btn" bind:this={customizeButton}>Customize</button>
 			</div>
 		</div>
 	</div>
