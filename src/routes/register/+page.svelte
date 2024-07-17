@@ -11,52 +11,22 @@
 	};
 
 	let usertype: string,
-		postalcode: number,
-		firstname: string,
-		lastname: string,
-		phone: number,
+		name: string,
 		email: string,
 		password: string,
-		streetaddress: string,
-		city: string,
-		state: string,
-		firstnameInputError: string,
-		lastnameInputError: string,
+		nameInputError: string,
 		phoneInputError: string,
 		emailInputError: string,
-		passwordInputError: string,
-		streetAddressInputError: string,
-		cityInputError: string,
-		postalCodeInputError: string;
+		passwordInputError: string;
 	let showPassword: boolean = false;
 
-	function validateFirstName() {
+	function validateName() {
 		const nameRegex = /^[A-Za-z]+$/;
 
-		if (!nameRegex.test(firstname)) {
-			firstnameInputError = 'First name can only contain letters.';
+		if (!nameRegex.test(name)) {
+			nameInputError = 'First name can only contain letters.';
 		} else {
-			firstnameInputError = '';
-		}
-	}
-
-	function validateLastName() {
-		const nameRegex = /^[A-Za-z]+$/;
-
-		if (!nameRegex.test(lastname)) {
-			lastnameInputError = 'Last name can only contain letters.';
-		} else {
-			lastnameInputError = '';
-		}
-	}
-
-	function validatePhoneNumber() {
-		const phoneString = phone.toString();
-		const phoneRegex = /^\d{10}$/;
-		if (!phoneRegex.test(phoneString)) {
-			phoneInputError = 'Please provide a valid 10 digit phone number';
-		} else {
-			phoneInputError = '';
+			nameInputError = '';
 		}
 	}
 
@@ -91,48 +61,12 @@
 		}
 	}
 
-	function validateStreetAddress() {
-		const addressRegex = /^[a-zA-Z0-9#,. -]+$/;
-
-		if (!addressRegex.test(streetaddress)) {
-			streetAddressInputError = 'Street address can only contain letters, numbers, #, ,, ., and -';
-		} else {
-			streetAddressInputError = '';
-		}
-	}
-
-	function validateCity() {
-		const cityRegex = /^[A-Za-z]+$/;
-
-		if (!cityRegex.test(city)) {
-			cityInputError = 'City name can contain only letters';
-		} else {
-			cityInputError = '';
-		}
-	}
-
-	function validatePostalcode() {
-		const postalCodeString = postalcode.toString();
-		const postalCodeRegex = /^\d{6}$/;
-		if (!postalCodeRegex.test(postalCodeString)) {
-			postalCodeInputError = 'Please enter a valid 6 digit postal code';
-		} else {
-			postalCodeInputError = '';
-		}
-	}
-
 	async function handleSubmit() {
 		const formData = {
 			usertype: parseInt(usertype),
-			firstname,
-			lastname,
-			phone,
+			name,
 			email,
-			password,
-			streetaddress,
-			city,
-			postalcode,
-			state
+			password
 		};
 
 		if (!validateFormData(formData)) {
@@ -159,17 +93,7 @@
 	}
 
 	function validateFormData(formData: any) {
-		if (
-			!formData.firstname ||
-			!formData.lastname ||
-			!formData.phone ||
-			!formData.email ||
-			!formData.password ||
-			!formData.streetaddress ||
-			!formData.city ||
-			!formData.postalcode ||
-			!formData.state
-		) {
+		if (!formData.name || !formData.email || !formData.password) {
 			alert('All fields are required and need to be valid.');
 			return false;
 		}
@@ -194,7 +118,7 @@
 </svelte:head>
 
 <div class="border">
-	<NavBar {ToggleModal} />
+	<NavBar />
 </div>
 <div class="bg-[#fcefb4] flex flex-col justify-center items-center py-10">
 	<header class="py-4">
@@ -215,43 +139,16 @@
 			<option value={merchant_id}>A Merchant</option>
 		</select>
 
-		<label class="block text-gray-700 text-sm font-bold mb-2" for="firstname">First Name:</label>
+		<label class="block text-gray-700 text-sm font-bold mb-2" for="firstname">Name:</label>
 		<input
 			class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-4"
 			type="text"
 			id="firstname"
-			bind:value={firstname}
-			on:input={validateFirstName}
+			bind:value={name}
 			required
 		/>
-		{#if firstnameInputError}
-			<p class="text-red-500 text-xs italic">{firstnameInputError}</p>
-		{/if}
-
-		<label class="block text-gray-700 text-sm font-bold mb-2" for="lastname">Last Name:</label>
-		<input
-			class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-4"
-			type="text"
-			id="lastname"
-			bind:value={lastname}
-			on:input={validateLastName}
-			required
-		/>
-		{#if lastnameInputError}
-			<p class="text-red-500 text-xs italic">{lastnameInputError}</p>
-		{/if}
-
-		<label class="block text-gray-700 text-sm font-bold mb-2" for="phone">Phone Number:</label>
-		<input
-			class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-4"
-			type="tel"
-			id="phone"
-			bind:value={phone}
-			on:input={validatePhoneNumber}
-			required
-		/>
-		{#if phoneInputError}
-			<p class="text-red-500 text-xs italic">{phoneInputError}</p>
+		{#if nameInputError}
+			<p class="text-red-500 text-xs italic">{nameInputError}</p>
 		{/if}
 
 		<label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email:</label>
@@ -324,112 +221,12 @@
 			<p class="text-red-500 text-xs italic">{passwordInputError}</p>
 		{/if}
 
-		<label class="block text-gray-700 text-sm font-bold mb-2" for="streetaddress"
-			>Street Address:</label
-		>
-		<input
-			class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-4"
-			type="text"
-			id="streetaddress"
-			bind:value={streetaddress}
-			on:input={validateStreetAddress}
-			required
-		/>
-		{#if streetAddressInputError}
-			<p class="text-red-500 text-xs italic">{streetAddressInputError}</p>
-		{/if}
-
-		<label class="block text-gray-700 text-sm font-bold mb-2" for="city">City:</label>
-		<input
-			class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-4"
-			type="text"
-			id="city"
-			bind:value={city}
-			on:input={validateCity}
-			required
-		/>
-		{#if cityInputError}
-			<p class="text-red-500 text-xs italic">{cityInputError}</p>
-		{/if}
-
-		<label class="block text-gray-700 text-sm font-bold mb-2" for="postalcode">Postal Code:</label>
-		<input
-			class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-4"
-			type="text"
-			id="postalcode"
-			bind:value={postalcode}
-			on:input={validatePostalcode}
-			required
-		/>
-		{#if postalCodeInputError}
-			<p class="text-red-500 text-xs italic">{postalCodeInputError}</p>
-		{/if}
-
-		<label class="block text-gray-700 text-sm font-bold mb-2" for="state">State:</label>
-		<div class="relative">
-			<select
-				class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-6"
-				id="state"
-				bind:value={state}
-				required
-			>
-				<option value="" disabled selected>Select your state</option>
-				<option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
-				<option value="Andhra Pradesh">Andhra Pradesh</option>
-				<option value="Arunachal Pradesh">Arunachal Pradesh</option>
-				<option value="Assam">Assam</option>
-				<option value="Bihar">Bihar</option>
-				<option value="Chandigarh">Chandigarh</option>
-				<option value="Chhattisgarh">Chhattisgarh</option>
-				<option value="Dadra and Nagar Haveli">Dadra and Nagar Haveli</option>
-				<option value="Daman and Diu">Daman and Diu</option>
-				<option value="Delhi">Delhi</option>
-				<option value="Goa">Goa</option>
-				<option value="Gujarat">Gujarat</option>
-				<option value="Haryana">Haryana</option>
-				<option value="Himachal Pradesh">Himachal Pradesh</option>
-				<option value="Jammu and Kashmir">Jammu and Kashmir</option>
-				<option value="Jharkhand">Jharkhand</option>
-				<option value="Karnataka">Karnataka</option>
-				<option value="Kerala">Kerala</option>
-				<option value="Ladakh">Ladakh</option>
-				<option value="Lakshadweep">Lakshadweep</option>
-				<option value="Madhya Pradesh">Madhya Pradesh</option>
-				<option value="Maharashtra">Maharashtra</option>
-				<option value="Manipur">Manipur</option>
-				<option value="Meghalaya">Meghalaya</option>
-				<option value="Mizoram">Mizoram</option>
-				<option value="Nagaland">Nagaland</option>
-				<option value="Odisha">Odisha</option>
-				<option value="Puducherry">Puducherry</option>
-				<option value="Punjab">Punjab</option>
-				<option value="Rajasthan">Rajasthan</option>
-				<option value="Sikkim">Sikkim</option>
-				<option value="Tamil Nadu">Tamil Nadu</option>
-				<option value="Telangana">Telangana</option>
-				<option value="Tripura">Tripura</option>
-				<option value="Uttar Pradesh">Uttar Pradesh</option>
-				<option value="Uttarakhand">Uttarakhand</option>
-				<option value="West Bengal">West Bengal</option>
-			</select>
-			<div
-				class="pointer-events-none absolute inset-y-0 right-0 flex justify-center items-center px-2 text-gray-700"
-			>
-				<div class="absolute top-1.5 right-2">
-					<svg class="fill-current h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-						<path
-							fill-rule="evenodd"
-							d="M5.293 7.293a1 1 0 0 1 1.414 0L10 10.586l3.293-3.293a1 1 0 1 1 1.414 1.414l-4 4a1 1 0 0 1-1.414 0l-4-4a1 1 0 0 1 0-1.414z"
-						/>
-					</svg>
-				</div>
-			</div>
-		</div>
 		<button
 			class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full focus:outline-none focus:shadow-outline"
+			style="margin-top: 20px;"
 			type="submit">Sign Up</button
 		>
 	</form>
 </div>
 
-<Footer {ToggleModal} />
+<Footer />

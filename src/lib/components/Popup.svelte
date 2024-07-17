@@ -4,8 +4,7 @@
 
 	export let show = false;
 	export let imageSrc = '';
-	export let material_type = '';
-	export let size = '';
+	export let Design = '';
 	export let name = '';
 	export let fit = '';
 
@@ -22,15 +21,9 @@
 				<img class="popup-image" src={imageSrc} alt="Popup Image" />
 			</div>
 			<div class="popup-data">
-				<h2 class="popup-title">Material Type: {material_type}</h2>
-				<div class="size">
-					<p>Select Size: {size}</p>
-					<button> S</button>
-					<button> M</button>
-					<button> L</button>
-				</div>
+				<h2 class="popup-title">Design: {Design}</h2>
 				<p>Name: {name}</p>
-				<p>Fit: {fit}</p>
+				<p>Fit Type: {fit}</p>
 				<button class="btn">Customize</button>
 			</div>
 		</div>
@@ -38,53 +31,91 @@
 {/if}
 
 <style>
+	@keyframes fadeIn {
+		from {
+			opacity: 0;
+		}
+		to {
+			opacity: 1;
+		}
+	}
+
+	@keyframes slideIn {
+		from {
+			transform: translateY(50px);
+			opacity: 0;
+		}
+		to {
+			transform: translateY(0);
+			opacity: 1;
+		}
+	}
+
 	.popup {
 		position: fixed;
 		top: 0;
 		left: 0;
 		width: 100%;
 		height: 100%;
-		background-color: rgba(0, 0, 0, 0.5);
+		background-color: rgba(0, 0, 0, 0.6);
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		z-index: 1000;
+		animation: fadeIn 0.3s ease-in-out;
 	}
+
 	.popup-content {
 		display: flex;
+		flex-direction: row;
 		max-width: 80%;
 		margin: auto;
 		background-color: white;
 		border-radius: 20px;
 		overflow: hidden;
+		box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+		animation: slideIn 0.3s ease-in-out;
 	}
+
 	.popup-image {
-		flex-basis: 50%;
 		max-width: 100%;
-		max-height: 80vh;
-		padding: 10px;
+		max-height: 90vh;
 	}
+
 	.popup-data {
-		flex-basis: 50%;
+		margin-top: 20px;
+		margin-left: 10px;
+		width: 100%;
 		display: flex;
 		flex-direction: column;
-		padding: 20px;
-		margin-top: 20px;
+		align-items: flex-start;
+		justify-content: center;
 	}
+
 	.popup-title {
 		color: #e1b42f;
 		margin-bottom: 10px;
+		font-size: 1.5rem;
 	}
+
+	.popup-data p {
+		margin: 10px 0px 10px 0px;
+	}
+
 	.btn {
 		background-color: #e1b42f;
-		width: 100px;
+		width: 150px;
 		font-weight: bold;
 		color: white;
-		margin-top: auto;
+		border: none;
+		padding: 10px;
 		border-radius: 8px;
+		cursor: pointer;
+		transition: background-color 0.3s ease;
+		margin-top: 170px;
 	}
-	.size {
-		display: flex;
-		flex-direction: row;
+
+	.btn:hover {
+		background-color: #d0a11f;
 	}
 </style>

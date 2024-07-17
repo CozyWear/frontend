@@ -5,7 +5,6 @@
 	import Popup from '$lib/components/Popup.svelte';
 
 	const trendingImg = ['t1.jpg', 'k2.jpg', 't3.jpg', 'm4.jpg'];
-	const images = ['ps1.jpg', 'ps2.jpg', 'ps3.jpg', 'ps4.jpg'];
 	const men = ['m1.jpg', 'm2.jpg', 'm3.jpg', 'm4.jpg'];
 	const kid = ['k1.jpg', 'k2.jpg', 'k3.jpg', 'k4.jpg'];
 	const women = ['t1.jpg', 't2.jpg', 't3.jpg', 't4.jpg'];
@@ -21,10 +20,9 @@
 	let popupName = '';
 	let popupFit = '';
 
-	function displayPopup(imageSrc: string, material_type: string, name: string, fit: string) {
-		console.log('Displaying popup with', imageSrc, material_type, name, fit);
+	function displayPopup(imageSrc: string, Design: string, name: string, fit: string) {
 		popupImageSrc = imageSrc;
-		popupMaterial = material_type;
+		popupMaterial = Design;
 		popupName = name;
 		popupFit = fit;
 		showPopup = true;
@@ -70,6 +68,7 @@
 
 		//const trendingInterval = setInterval(cycleImg, 4000);
 	});
+
 	//Men Slide Show
 	onMount(() => {
 		const container = document.getElementById('men');
@@ -82,7 +81,7 @@
 				img.src = men[i % men.length];
 				img.className = 'h-auto w-56 pt-3.5 pl-5';
 				img.addEventListener('click', () => {
-					displayPopup(img.src, 'Title', 'Description', 'dfs', 'dfs');
+					displayPopup(img.src, 'Title', 'Description', 'dfs');
 				});
 				container.appendChild(img);
 			}
@@ -121,7 +120,7 @@
 				img.src = kid[i % kid.length];
 				img.className = 'h-auto w-56 pt-3.5 pl-5 rounded-3xl';
 				img.addEventListener('click', () => {
-					displayPopup(img.src, 'Title', 'Description', 'dfs', 'dfs');
+					displayPopup(img.src, 'Title', 'Description', 'dfs');
 				});
 				container.appendChild(img);
 			}
@@ -162,7 +161,7 @@
 				img.src = women[i % women.length];
 				img.className = 'h-auto w-56 pt-3.5 pl-5 rounded-3xl';
 				img.addEventListener('click', () => {
-					displayPopup(img.src, 'Title', 'Description', 'dfs', 'dfs');
+					displayPopup(img.src, 'Title', ' Banarasi saree', 'Traditional');
 				});
 				container.appendChild(img);
 			}
@@ -243,7 +242,7 @@
 <Popup
 	bind:show={showPopup}
 	imageSrc={popupImageSrc}
-	material_type={popupMaterial}
+	Design={popupMaterial}
 	name={popupName}
 	fit={popupFit}
 	on:close={() => (showPopup = false)}
