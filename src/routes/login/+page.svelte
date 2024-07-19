@@ -28,7 +28,8 @@
 				headers: {
 					'Content-Type': 'application/json'
 				},
-				body: JSON.stringify(formData)
+				body: JSON.stringify(formData),
+				rejectUnauthorized: false
 			});
 
 			if (response.ok) {
@@ -60,7 +61,7 @@
 </svelte:head>
 
 <div class="border">
-	<NavBar {ToggleModal} />
+	<NavBar />
 </div>
 
 <div class="bg-[#fcefb4] flex flex-col justify-between items-center py-10">
@@ -155,4 +156,4 @@
 	</form>
 </div>
 
-<Footer {ToggleModal} />
+<Footer />

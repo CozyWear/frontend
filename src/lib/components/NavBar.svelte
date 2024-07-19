@@ -17,6 +17,11 @@
 				<a href="/" style="font-family: Sweaty;">CozyWear</a>
 			</div>
 		</div>
+		<input
+			type="text"
+			placeholder="  Search..."
+			style="border-radius: 30px; border:1px solid black; width:500px; height:40px"
+		/>
 		<ul class="flex space-x-4">
 			<li><a href="/" class="text-black text-sm">Home</a></li>
 			<li><a href="/aboutus" class="text-black text-sm">About Us</a></li>

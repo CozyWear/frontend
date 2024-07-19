@@ -17,91 +17,82 @@
 </script>
 
 <NavBar />
-<div class="flex justify-around items-center text-white mt-1">
-	<div class="text-center">
-		<a href="/category/men/">
-			<img src="men.jpg" alt="Men" class="w-16 h-16 mt-0.5 rounded-full" />
-		</a>
-		<p class="font-semibold text-sm" style="color: #e1b42f;">Men</p>
+<div class="content">
+	<div class="flex justify-around items-center text-white mt-1">
+		<div class="text-center">
+			<a href="/category/men/">
+				<img src="men.jpg" alt="Men" class="w-16 h-16 mt-0.5 rounded-full" />
+			</a>
+			<p class="font-semibold text-sm" style="color: #e1b42f;">Men</p>
+		</div>
+		<div class="text-center">
+			<a href="/category/kids/">
+				<img src="kid.jpg" alt="Kids" class="w-16 h-16 mt-0.5 rounded-full" />
+			</a>
+			<p class="font-semiboldtext-sm" style="color: #e1b42f;">Kids</p>
+		</div>
+		<div class="text-center">
+			<a href="/category/women/">
+				<img src="woman.jpg" alt="Women" class="w-16 h-16 mt-0.5 rounded-full" />
+			</a>
+			<p class="font-semibold text-sm" style="color: #e1b42f;">Women</p>
+		</div>
 	</div>
-	<div class="text-center">
-		<a href="/category/kids/">
-			<img src="kid.jpg" alt="Kids" class="w-16 h-16 mt-0.5 rounded-full" />
-		</a>
-		<p class="font-semiboldtext-sm" style="color: #e1b42f;">Kids</p>
-	</div>
-	<div class="text-center">
-		<a href="/category/women/">
-			<img src="woman.jpg" alt="Women" class="w-16 h-16 mt-0.5 rounded-full" />
-		</a>
-		<p class="font-semibold text-sm" style="color: #e1b42f;">Women</p>
-	</div>
-</div>
 
-<div
-	class="bg-cover bg-center h-96 mt-1 w-full flex items-end justify-center"
-	style="background-image: url('ps1.jpg');"
->
-	<button style="background-color: #e1b42f; margin-bottom: 20px;" class="rounded-3xl text-white"
-		>Customize Your Style</button
+	<div
+		class="bg-cover bg-center h-96 mt-1 w-full flex items-end justify-center"
+		style="background-image: url('ps1.jpg');"
 	>
-</div>
+		<button style="background-color: #e1b42f; margin-bottom: 20px;" class="rounded-3xl text-white"
+			>Customize Your Style</button
+		>
+	</div>
 
-<h1 class="text-center text-3xl font-semibold dmt-8" style="color: #e1b42f;padding-top:15px">
-	Popular Combos
-</h1>
-<p style="text-align: center; font-weight:250; padding: 15px 20px; font-size:16px;">
-	In today's fast-paced world, convenience is key. At CozyWear, our popular combos are designed to <br
-	/>
-	provide you with stylish and coordinated outfits, all from the comfort of your home. <br />
-</p>
-<div class="flex justify-center items-cent" id="combos" style="padding: 15px 15px;"></div>
+	<h1 class="text-center text-3xl font-semibold dmt-8" style="color: #e1b42f;padding-top:15px">
+		Popular Combos
+	</h1>
+	<p style="text-align: center; font-weight:250; padding: 15px 20px; font-size:16px;">
+		In today's fast-paced world, convenience is key. At CozyWear, our popular combos are designed to <br
+		/>
+		provide you with stylish and coordinated outfits, all from the comfort of your home. <br />
+	</p>
+	<div class="flex justify-center items-cent" id="combos" style="padding: 15px 15px;"></div>
 
-<h1 class="text-center text-3xl font-semibold mt-2" id="ser" style="color: #e1b42f;">
-	Our Services
-</h1>
-<p style="text-align: center; font-weight:250; padding: 15px 20px; font-size:16px;">
-	With the rapid advancement of technology, it's essential to establish an online presence.<br />
-	At CozyWear, we offer convenient tailoring services that <br />
-	you can enjoy from the comfort of your home.
-</p>
-<div class="flex justify-center items-cent mt-4 mb-4">
-	<div class="text-center">
-		<img src="fab.jpg" alt="Fabric Selection" class="h-auto w-60 pt-3.5 pl-5 m-2.5" />
-		<p class="mt-2 font-semibold" style="color: #e1b42f;">Fabric Selection</p>
-	</div>
-	<div class="text-center">
-		<img src="ds.jpg" alt="Designer Consultation" class="h-auto w-60 pt-3.5 pl-5 m-2.5" />
-		<p class="mt-2 font-semibold" style="color: #e1b42f;">Designer Consultation</p>
-	</div>
-	<div class="text-center">
-		<img src="exp.jpg" alt="Express Service" class="h-auto w-60 pt-3.5 pl-5 m-2.5" />
-		<p class="mt-2 font-semibold" style="color: #e1b42f;">Express Service</p>
-	</div>
-	<div class="text-center">
-		<img src="p&d.jpg" alt="PickUp & Delhivery" class="h-auto w-60 pt-3.5 pl-5 m-2.5" />
-		<p class="mt-2 font-semibold" style="color: #e1b42f;">PickUp & Delivery</p>
+	<h1 class="text-center text-3xl font-semibold mt-2" id="ser" style="color: #e1b42f;">
+		Our Services
+	</h1>
+	<p style="text-align: center; font-weight:250; padding: 15px 20px; font-size:16px;">
+		With the rapid advancement of technology, it's essential to establish an online presence.<br />
+		At CozyWear, we offer convenient tailoring services that <br />
+		you can enjoy from the comfort of your home.
+	</p>
+	<div class="flex justify-center items-cent mt-4 mb-4">
+		<div class="text-center">
+			<img src="fab.jpg" alt="Fabric Selection" class="h-auto w-60 pt-3.5 pl-5 m-2.5" />
+			<p class="mt-2 font-semibold" style="color: #e1b42f;">Fabric Selection</p>
+		</div>
+		<div class="text-center">
+			<img src="ds.jpg" alt="Designer Consultation" class="h-auto w-60 pt-3.5 pl-5 m-2.5" />
+			<p class="mt-2 font-semibold" style="color: #e1b42f;">Designer Consultation</p>
+		</div>
+		<div class="text-center">
+			<img src="exp.jpg" alt="Express Service" class="h-auto w-60 pt-3.5 pl-5 m-2.5" />
+			<p class="mt-2 font-semibold" style="color: #e1b42f;">Express Service</p>
+		</div>
+		<div class="text-center">
+			<img src="p&d.jpg" alt="PickUp & Delhivery" class="h-auto w-60 pt-3.5 pl-5 m-2.5" />
+			<p class="mt-2 font-semibold" style="color: #e1b42f;">PickUp & Delivery</p>
+		</div>
 	</div>
 </div>
 <Footer />
 
 <style>
-	.inputs {
-		background-color: #fefefe;
-		margin: 5% auto;
-		padding: 10px;
-		border: 1px solid #888;
-		width: 80%;
-		border-radius: 10px;
-	}
 	button {
 		border: 0;
 		cursor: pointer;
 		padding: 8px 12px;
 		font-weight: bold;
 		box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.2);
-	}
-	h3 {
-		font-size: 24px;
 	}
 </style>

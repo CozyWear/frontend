@@ -1,4 +1,4 @@
-export const api_url = 'https://localhost:8000';
+export const api_url = 'https://172.16.0.165:8000';
 export const customer_id = '0';
 export const tailor_id = '1';
 export const merchant_id = '2';

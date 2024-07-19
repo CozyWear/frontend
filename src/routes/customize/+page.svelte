@@ -1,21 +1,22 @@
 <script lang="ts">
 	import NavBar from '$lib/components/NavBar.svelte';
 	import Footer from '$lib/components/Footer.svelte';
-	import Popup from '$lib/components/Popup.svelte';
+	import { onMount } from 'svelte';
+	import { img } from '$lib/stores/image';
 
-	let showPopup = false;
-	let imageSrc = '';
+	let popupImage = '';
 
-	function handleImageSelected(event) {
-		imageSrc = event.detail.src;
-		showPopup = false;
-	}
+	onMount(() => {
+		img.subscribe((value) => {
+			popupImage = value;
+		});
+	});
 </script>
 
 <NavBar />
 <div class="Container">
 	<div class="img">
-		<img src={imageSrc} alt="Selected Image" />
+		<img src={popupImage} alt="Selected Image" />
 	</div>
 </div>
 <Footer />

@@ -195,7 +195,7 @@
 
 <div
 	class="bg-cover bg-center h-96 mt-1 w-full flex items-end justify-center"
-	style="background-image: url('ps1.jpg');"
+	style="background-image: url('ps1.jpg'); margin:0;"
 >
 	<button
 		style="background-color: #e1b42f; margin-bottom: 20px; padding: 8px 12px; font-weight: bold;"
@@ -208,6 +208,10 @@
 <h1 class="text-center text-3xl font-semibold mt-8" style="color: #e1b42f; padding-top: 15px;">
 	Trending
 </h1>
+<p style="text-align: center; font-weight:300; padding: 15px 20px; font-size:16px;">
+	Stay ahead with our top trending items, handpicked for style and popularity. Discover what's hot
+	this season<br /> and update your wardrobe with the latest fashion must-haves.
+</p>
 <div class="flex justify-center items-center">
 	<button id="TleftArrow">←</button>
 	<div class="flex justify-center items-center" id="trending" style="padding: 15px 15px;"></div>
@@ -217,6 +221,10 @@
 <h1 class="text-center text-3xl font-semibold mt-8" style="color: #e1b42f; padding-top: 15px;">
 	Men
 </h1>
+<p style="text-align: center; font-weight:300; padding: 15px 20px; font-size:16px;">
+	Explore our exclusive men's collection, crafted for the modern man. <br />From casual wear to
+	formal attire, find the perfect outfit for any occasion.
+</p>
 <div class="flex justify-center items-center">
 	<button id="MleftArrow">←</button>
 	<div class="flex justify-center items-center" id="men" style="padding: 15px 15px;"></div>
@@ -225,6 +233,10 @@
 <h1 class="text-center text-3xl font-semibold mt-8" style="color: #e1b42f; padding-top: 15px;">
 	Kids
 </h1>
+<p style="text-align: center; font-weight:300; padding: 15px 20px; font-size:16px;">
+	Find the cutest outfits for your little ones in our vibrant kids' section. From playful patterns
+	to<br /> comfortable designs, our collection ensures your kids look stylish and feel great
+</p>
 <div class="flex justify-center items-center">
 	<button id="KleftArrow">←</button>
 	<div class="flex justify-center items-center" id="kid" style="padding: 15px 15px;"></div>
@@ -233,6 +245,11 @@
 <h1 class="text-center text-3xl font-semibold mt-8" style="color: #e1b42f; padding-top: 15px;">
 	Women
 </h1>
+<p style="text-align: center; font-weight:300; padding: 15px 20px; font-size:16px;">
+	Indulge in the latest trends with our women's fashion collection. Elegant, chic, and trendy,<br />
+	our pieces are designed to make you stand out. Discover new arrivals and timeless classics that define
+	your personal style
+</p>
 <div class="flex justify-center items-center">
 	<button id="WleftArrow">←</button>
 	<div class="flex justify-center items-center" id="women" style="padding: 15px 15px;"></div>

@@ -1,6 +1,8 @@
-<script>
-	import { onMount } from 'svelte';
+<script lang="ts">
+	import { goto } from '$app/navigation';
 	import { createEventDispatcher } from 'svelte';
+	import { img } from '../stores/image';
+	import { get } from 'svelte/store';
 	const dispatch = createEventDispatcher();
 
 	export let show = false;
@@ -9,23 +11,17 @@
 	export let name = '';
 	export let fit = '';
 
-	let customizeButton;
+	function handleBtn() {
+		img.set(imageSrc);
+	}
 
+	function navigation() {
+		goto('/customize');
+	}
 	const close = () => {
 		show = false;
 		dispatch('close');
 	};
-
-	const selectImage = () => {
-		dispatch('imageSelected', { src: imageSrc });
-		close();
-	};
-
-	onMount(() => {
-		customizeButton.addEventListener('click', () => {
-			window.location.href = 'cozywear.pages.dev/customize'; // Add the actual URL you want to navigate to
-		});
-	});
 </script>
 
 {#if show}
@@ -38,7 +34,7 @@
 				<h2 class="popup-title">Design: {Design}</h2>
 				<p>Name: {name}</p>
 				<p>Fit Type: {fit}</p>
-				<button class="btn" bind:this={customizeButton}>Customize</button>
+				<button id="btn" on:click={navigation}>Customize</button>
 			</div>
 		</div>
 	</div>
@@ -116,7 +112,7 @@
 		margin: 10px 0px 10px 0px;
 	}
 
-	.btn {
+	#btn {
 		background-color: #e1b42f;
 		width: 150px;
 		font-weight: bold;
@@ -129,7 +125,7 @@
 		margin-top: 170px;
 	}
 
-	.btn:hover {
+	#btn:hover {
 		background-color: #d0a11f;
 	}
 </style>
