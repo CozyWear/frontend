@@ -65,7 +65,7 @@
 
 <style>
 	.card {
-		width: 300px;
+		width: 325px;
 		max-height: 600px;
 		padding: 16px;
 		margin: 30px;
@@ -75,7 +75,7 @@
 		background-color: #d3d3d3;
 		display: flex;
 		flex-direction: column;
-		justify-content: space-between;
+		justify-content: space-evenly;
 	}
 
 	.fabric-image {
@@ -128,7 +128,7 @@
 		cursor: pointer;
 		font-size: 14px;
 		margin: 0 5px;
-		background-color: #e0aa3e;
+		background-color: #e1b42f;
 		color: white;
 	}
 </style>

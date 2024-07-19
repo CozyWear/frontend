@@ -3,12 +3,11 @@
 	import type { ViewAttribute } from '$lib/components/ViewCard.svelte';
 
 	const attributes: ViewAttribute[] = [
-		{ name: 'Style Name' },
-		{ name: 'Size' },
-		{ name: 'Style Type' },
+		{ name: 'Material Name' },
 		{ name: 'Material Type' },
-		{ name: 'Fit Type' },
-		{ name: 'Cost Per Unit' }
+		{ name: 'Size' },
+		{ name: 'Cost Per Unit' },
+		{ name: 'Stock Quantity' }
 	];
 
 	function addImage() {
@@ -49,8 +48,6 @@
 		</div>
 	</div>
 </div>
-
-<!-- alternate color #e0aa3e -->
 
 <style>
 	.page-container {

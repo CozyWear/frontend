@@ -1,5 +1,4 @@
 <script lang="ts">
-	// BUG: Going forth and back from Add & View adds a new card each time
 	import NavBar from '$lib/components/NavBar.svelte';
 	import ViewCard from '$lib/components/ViewCard.svelte';
 	import type { ViewAttribute } from '$lib/components/ViewCard.svelte';
@@ -12,11 +11,6 @@
 		{ name: 'Fit Type' },
 		{ name: 'Cost Per Unit' }
 	];
-
-	let showModal = false;
-	const ToggleModal = () => {
-		showModal = !showModal;
-	};
 
 	let cards = [{}, {}, {}];
 </script>
@@ -74,6 +68,6 @@
 	}
 
 	#add-button:hover {
-		box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+		box-shadow: 2px 4px 4px 2px rgba(0, 0, 0, 0.25);
 	}
 </style>
