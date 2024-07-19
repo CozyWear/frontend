@@ -2,9 +2,6 @@
 	import { createEventDispatcher } from 'svelte';
 	const dispatch = createEventDispatcher();
 
-	const ToggleModal = () => {
-		dispatch('toggleModal');
-	};
 </script>
 
 <footer class="bg-gray-800 text-white py-8">
@@ -14,7 +11,7 @@
 				<h2 class="text-2xl font-semibold mb-2" style="color: #e1b42f;">CozyWear</h2>
 				<ul class="list-none">
 					<li><a href="/aboutus" class="hover:text-gray-400">About Us</a></li>
-					<li><a href="#" class="hover:text-gray-400" on:click={ToggleModal}>Contact Us</a></li>
+					<li><a href="/contactus" class="hover:text-gray-400">Contact Us</a></li>
 					<li><a href="/privacy-policy" class="hover:text-gray-400">Privacy Policy</a></li>
 				</ul>
 			</div>
