@@ -4,7 +4,6 @@
 	import Footer from '$lib/components/Footer.svelte';
 	import Popup from '$lib/components/Popup.svelte';
 
-	const trendingImg = ['t1.jpg', 'k2.jpg', 't3.jpg', 'm4.jpg'];
 	const men = ['m1.jpg', 'm2.jpg', 'm3.jpg', 'm4.jpg'];
 	const kid = ['k1.jpg', 'k2.jpg', 'k3.jpg', 'k4.jpg'];
 	const women = ['t1.jpg', 't2.jpg', 't3.jpg', 't4.jpg'];
@@ -27,47 +26,6 @@
 		popupFit = fit;
 		showPopup = true;
 	}
-
-	//Trending Slide show
-	onMount(() => {
-		const container = document.getElementById('trending');
-
-		const createImage = () => {
-			container.innerHTML = '';
-
-			for (let i = trendingIndex; i < trendingIndex + 4; i++) {
-				const img = document.createElement('img');
-				img.src = trendingImg[i % trendingImg.length];
-				img.className = 'h-auto w-56 pt-3.5 pl-5 rounded-3xl';
-				img.addEventListener('click', () => {
-					displayPopup(img.src, 'Title', 'dfs', 'dfs');
-				});
-				container.appendChild(img);
-			}
-		};
-
-		createImage();
-
-		const cycleImg = () => {
-			trendingIndex = (trendingIndex + 1) % trendingImg.length;
-			createImage();
-		};
-
-		const TleftArrow = document.getElementById('TleftArrow');
-		const TrightArrow = document.getElementById('TrightArrow');
-
-		TleftArrow.addEventListener('click', () => {
-			trendingIndex = (trendingIndex - 1 + trendingImg.length) % trendingImg.length;
-			createImage();
-		});
-
-		TrightArrow.addEventListener('click', () => {
-			trendingIndex = (trendingIndex + 1) % trendingImg.length;
-			createImage();
-		});
-
-		//const trendingInterval = setInterval(cycleImg, 4000);
-	});
 
 	//Men Slide Show
 	onMount(() => {

@@ -77,13 +77,13 @@
 			const response = await fetch(`${api_url}/accounts/register`, {
 				method: 'POST',
 				headers: {
-					'Content-Type': 'application/json'
+					'Content-Type': 'application/json' // Corrected semicolon
 				},
 				body: JSON.stringify(formData)
 			});
 
-			if (response.ok) {
-				console.log('Signup successful!');
+			if (response.status === 201) {
+				console.log('Signup successful!', response.body); // Log success and the response
 			} else {
 				console.error('Signup failed:', response.statusText);
 			}

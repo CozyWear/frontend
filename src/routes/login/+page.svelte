@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { goto } from '$app/navigation';
 	import { api_url } from '$lib/constants';
 	import { customer_id, tailor_id, merchant_id } from '$lib/constants';
 	import { onMount } from 'svelte';
@@ -28,14 +29,26 @@
 				headers: {
 					'Content-Type': 'application/json'
 				},
-				body: JSON.stringify(formData),
-				rejectUnauthorized: false
+				body: JSON.stringify(formData)
 			});
 
 			if (response.ok) {
-				console.log('Login Successful');
+				const data = await response.json();
+				switch (parseInt(usertype)) {
+					case 0:
+						await goto('/customer');
+						break;
+					case 1:
+						await goto('/tailor');
+						break;
+					case 2:
+						await goto('/merchant');
+						break;
+					default:
+						console.log('Invalid user type');
+				}
 			} else {
-				console.log('Invalid Email/Password/User Type');
+				console.log('Invalid Email/Password');
 				console.log(response);
 			}
 		} catch (error) {
