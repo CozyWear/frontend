@@ -33,16 +33,16 @@
 			});
 
 			if (response.ok) {
-				const data = await response.json();
+				console.log(response.json());
 				switch (parseInt(usertype)) {
 					case 0:
-						await goto('/customer');
+						goto('/customer').then();
 						break;
 					case 1:
-						await goto('/tailor');
+						goto('/tailor').then();
 						break;
 					case 2:
-						await goto('/merchant');
+						goto('/merchant').then();
 						break;
 					default:
 						console.log('Invalid user type');
