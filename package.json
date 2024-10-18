@@ -47,6 +47,8 @@
 		"workerd"
 	],
 	"dependencies": {
-		"bits-ui": "^0.21.16"
+		"bits-ui": "^0.21.16",
+		"lucide-svelte": "^0.453.0",
+		"svelte-sonner": "^0.3.28"
 	}
 }
