@@ -80,11 +80,7 @@
 	/>
 </svelte:head>
 
-<div class="border">
-	<NavBar />
-</div>
-
-<div class="flex flex-col items-center justify-between bg-[#fcefb4] py-10">
+<div class="flex flex-col items-center justify-center bg-[#fcefb4]" style="height: 100vh;">
 	<header class="py-4">
 		<h1 class="text-center text-3xl font-bold">Login</h1>
 	</header>
@@ -175,5 +171,3 @@
 		</div>
 	</form>
 </div>
-
-<Footer />
