@@ -1,8 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { createEventDispatcher } from 'svelte';
-	import { img } from '../stores/image';
-	import { get } from 'svelte/store';
 	const dispatch = createEventDispatcher();
 
 	export let show = false;
@@ -10,10 +8,6 @@
 	export let Design = '';
 	export let name = '';
 	export let fit = '';
-
-	function handleBtn() {
-		img.set(imageSrc);
-	}
 
 	function navigation() {
 		goto('/customize');
