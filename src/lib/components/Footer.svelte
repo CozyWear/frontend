@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
 	const dispatch = createEventDispatcher();
-
 </script>
 
 <footer class="bg-gray-800 text-white py-8">
