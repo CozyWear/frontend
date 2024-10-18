@@ -10,7 +10,8 @@
 	} from '$lib/components/ui/card';
 	import { CircleAlert } from 'lucide-svelte';
 	import { Alert, AlertDescription, AlertTitle } from '$lib/components/ui/alert';
-	import { Toaster } from 'svelte-sonner';
+	import { Toaster, toast } from 'svelte-sonner';
+
 	let isLoading = $state(false);
 
 	function handleLogout() {
@@ -19,7 +20,7 @@
 		setTimeout(() => {
 			isLoading = false;
 			// Show success message
-			Toaster.success('You have been successfully logged out.');
+			toast('You have been successfully logged out.');
 			// Redirect to login page or home page after logout
 			// window.location.href = "/login";
 		}, 2000);
