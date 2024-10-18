@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { Button } from '$lib/components/ui/button';
 	import {
 		Card,
@@ -11,7 +11,6 @@
 	import { CircleAlert } from 'lucide-svelte';
 	import { Alert, AlertDescription, AlertTitle } from '$lib/components/ui/alert';
 	import { Toaster } from 'svelte-sonner';
-	import { state } from 'svelte/store';
 	let isLoading = $state(false);
 
 	function handleLogout() {
