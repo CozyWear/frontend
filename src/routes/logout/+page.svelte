@@ -11,18 +11,18 @@
 	import { CircleAlert } from 'lucide-svelte';
 	import { Alert, AlertDescription, AlertTitle } from '$lib/components/ui/alert';
 	import { Toaster, toast } from 'svelte-sonner';
+	import { goto } from '$app/navigation';
+	import { userType } from '../store';
 
 	let isLoading = $state(false);
 
 	function handleLogout() {
 		isLoading = true;
-		// Simulating logout process
 		setTimeout(() => {
 			isLoading = false;
-			// Show success message
 			toast('You have been successfully logged out.');
-			// Redirect to login page or home page after logout
-			// window.location.href = "/login";
+			goto('/');
+			userType.set(-1);
 		}, 2000);
 	}
 </script>
