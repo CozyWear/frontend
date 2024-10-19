@@ -1,8 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import Modal from '$lib/components/Modal.svelte';
-	import Footer from '$lib/components/Footer.svelte';
-	import NavBar from '$lib/components/NavBar.svelte';
 
 	onMount(() => {
 		let images = ['t1.jpg', 't2.jpg', 't3.jpg', 't4.jpg'];
@@ -16,7 +14,6 @@
 	});
 </script>
 
-<NavBar />
 <div class="content">
 	<div
 		class="flex h-96 w-full items-end justify-center bg-cover bg-center"
@@ -64,7 +61,6 @@
 		</div>
 	</div>
 </div>
-<Footer />
 
 <style>
 	button {

@@ -2,13 +2,6 @@
 	import { api_url } from '$lib/constants';
 	import { customer_id, tailor_id, merchant_id } from '$lib/constants';
 	import { onMount } from 'svelte';
-	import Footer from '$lib/components/Footer.svelte';
-	import NavBar from '$lib/components/NavBar.svelte';
-
-	let showModal = false;
-	const ToggleModal = () => {
-		showModal = !showModal;
-	};
 
 	let usertype: string,
 		name: string,
@@ -117,20 +110,17 @@
 	/>
 </svelte:head>
 
-<div class="border">
-	<NavBar />
-</div>
-<div class="bg-[#fcefb4] flex flex-col justify-center items-center py-10">
+<div class="flex flex-col items-center justify-center bg-[#fcefb4] py-10">
 	<header class="py-4">
-		<h1 class="text-3xl font-bold text-center">Register</h1>
+		<h1 class="text-center text-3xl font-bold">Register</h1>
 	</header>
 	<form
-		class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 w-1/3 mt-10"
+		class="mb-4 mt-10 w-1/3 rounded bg-white px-8 pb-8 pt-6 shadow-md"
 		on:submit|preventDefault={handleSubmit}
 	>
-		<label class="block text-gray-700 text-sm font-bold mb-2" for="usertype">What are you:</label>
+		<label class="mb-2 block text-sm font-bold text-gray-700" for="usertype">What are you:</label>
 		<select
-			class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-4"
+			class="focus:shadow-outline mb-4 w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
 			id="usertype"
 			bind:value={usertype}
 		>
@@ -139,21 +129,21 @@
 			<option value={merchant_id}>A Merchant</option>
 		</select>
 
-		<label class="block text-gray-700 text-sm font-bold mb-2" for="firstname">Name:</label>
+		<label class="mb-2 block text-sm font-bold text-gray-700" for="firstname">Name:</label>
 		<input
-			class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-4"
+			class="focus:shadow-outline mb-4 w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
 			type="text"
 			id="firstname"
 			bind:value={name}
 			required
 		/>
 		{#if nameInputError}
-			<p class="text-red-500 text-xs italic">{nameInputError}</p>
+			<p class="text-xs italic text-red-500">{nameInputError}</p>
 		{/if}
 
-		<label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email:</label>
+		<label class="mb-2 block text-sm font-bold text-gray-700" for="email">Email:</label>
 		<input
-			class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-4"
+			class="focus:shadow-outline mb-4 w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
 			type="email"
 			id="email"
 			bind:value={email}
@@ -161,14 +151,14 @@
 			required
 		/>
 		{#if emailInputError}
-			<p class="text-red-500 text-xs italic">{emailInputError}</p>
+			<p class="text-xs italic text-red-500">{emailInputError}</p>
 		{/if}
 
-		<label class="block text-gray-700 text-sm font-bold mb-2" for="password">Password:</label>
+		<label class="mb-2 block text-sm font-bold text-gray-700" for="password">Password:</label>
 		<div class="relative">
 			{#if showPassword}
 				<input
-					class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pr-10"
+					class="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 pr-10 leading-tight text-gray-700 shadow focus:outline-none"
 					id="password"
 					type="password"
 					bind:value={password}
@@ -177,7 +167,7 @@
 				/>
 			{:else}
 				<input
-					class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline pr-10"
+					class="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 pr-10 leading-tight text-gray-700 shadow focus:outline-none"
 					id="password"
 					type="text"
 					bind:value={password}
@@ -185,7 +175,7 @@
 					required
 				/>
 			{/if}
-			<div class="absolute top-1.5 right-2">
+			<div class="absolute right-2 top-1.5">
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					class="h-6 w-6"
@@ -218,15 +208,13 @@
 			</div>
 		</div>
 		{#if passwordInputError}
-			<p class="text-red-500 text-xs italic">{passwordInputError}</p>
+			<p class="text-xs italic text-red-500">{passwordInputError}</p>
 		{/if}
 
 		<button
-			class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full focus:outline-none focus:shadow-outline"
+			class="focus:shadow-outline w-full rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none"
 			style="margin-top: 20px;"
 			type="submit">Sign Up</button
 		>
 	</form>
 </div>
-
-<Footer />

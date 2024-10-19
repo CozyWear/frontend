@@ -1,7 +1,5 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import NavBar from '$lib/components/NavBar.svelte';
-	import Footer from '$lib/components/Footer.svelte';
 	import Popup from '$lib/components/Popup.svelte';
 
 	const men = ['m1.jpg', 'm2.jpg', 'm3.jpg', 'm4.jpg'];
@@ -149,7 +147,6 @@
 	});
 </script>
 
-<NavBar />
 
 <div
 	class="bg-cover bg-center h-96 mt-1 w-full flex items-end justify-center"
@@ -223,4 +220,3 @@
 	on:close={() => (showPopup = false)}
 />
 
-<Footer />

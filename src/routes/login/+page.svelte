@@ -4,18 +4,11 @@
 	import { customer_id, tailor_id, merchant_id } from '$lib/constants';
 	import { onMount } from 'svelte';
 	import { userType } from '../store';
-	import NavBar from '$lib/components/NavBar.svelte';
-	import Footer from '$lib/components/Footer.svelte';
 
 	let email: string;
 	let password: string;
 	let usertype: string;
 	let showPassword: boolean = false;
-
-	let showModal = false;
-	const ToggleModal = () => {
-		showModal = !showModal;
-	};
 
 	async function handleSubmit() {
 		const formData = {

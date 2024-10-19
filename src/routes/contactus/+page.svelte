@@ -1,6 +1,4 @@
 <script lang="ts">
-	import NavBar from '$lib/components/NavBar.svelte';
-	import Footer from '$lib/components/Footer.svelte';
 	import { onMount } from 'svelte';
 
 	let name = '';
@@ -29,8 +27,6 @@
 </script>
 
 <div class="page-container">
-	<NavBar />
-
 	<div class="content-wrapper">
 		<div class="main-content">
 			<div class="contact-form-container">
@@ -67,7 +63,6 @@
 		</div>
 	</div>
 
-	<Footer />
 </div>
 
 <style>

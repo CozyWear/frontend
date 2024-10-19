@@ -3,13 +3,8 @@
 	const ToggleModal = () => {
 		showModal = !showModal;
 	};
-	import Footer from '$lib/components/Footer.svelte';
-	import NavBar from '$lib/components/NavBar.svelte';
 </script>
 
-<div class="border">
-	<NavBar {ToggleModal} />
-</div>
 <main class="max-w-8xl mx-auto p-8 bg-[#f2ece1] h-2/3">
 	<!-- <nav class="mb-8 flex justify-between items-center">
 			<div>
@@ -57,4 +52,3 @@
 		</p>
 	</section>
 </main>
-<Footer {ToggleModal} />
