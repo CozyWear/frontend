@@ -133,7 +133,7 @@
 					class="absolute right-2 top-1/2 -translate-y-1/2"
 					on:click={() => (showPassword = !showPassword)}
 				>
-					{#if showPassword}
+					{#if !showPassword}
 						<EyeOff class="h-5 w-5" />
 					{:else}
 						<Eye class="h-5 w-5" />
