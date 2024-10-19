@@ -29,7 +29,7 @@
 			<a href="/" class="text-sm text-gray-600 hover:text-gray-900">Home</a>
 			<a href="/aboutus" class="text-sm text-gray-600 hover:text-gray-900">About Us</a>
 			<a href="#services" class="text-sm text-gray-600 hover:text-gray-900">Services</a>
-			<a href="/contactus">Contact Us</a>
+			<a href="/contactus" class="text-sm text-gray-600 hover:text-gray-900">Contact Us</a>
 
 			{#if isLoggedIn}
 				<LogOut class="mr-2 h-4 w-4" />
@@ -53,7 +53,7 @@
 					<a href="/" class="text-sm text-gray-600 hover:text-gray-900">Home</a>
 					<a href="/aboutus" class="text-sm text-gray-600 hover:text-gray-900">About Us</a>
 					<a href="#services" class="text-sm text-gray-600 hover:text-gray-900">Services</a>
-					<a href="/contactus">Contact Us</a>
+					<a href="/contactus" class="text-sm text-gray-600 hover:text-gray-900">Contact Us</a>
 					{#if isLoggedIn}
 						<Button variant="ghost">
 							<a href="/logout">Logout</a>
