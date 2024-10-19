@@ -1,61 +1,73 @@
 <script lang="ts">
+	import { Button } from '$lib/components/ui/button';
+	import { Input } from '$lib/components/ui/input';
+	import { Sheet, SheetContent, SheetTrigger } from '$lib/components/ui/sheet';
+	import { Menu, LogOut } from 'lucide-svelte';
 	import { userType } from '../../routes/store';
-	import { createEventDispatcher } from 'svelte';
-	const dispatch = createEventDispatcher();
 
 	let isLoggedIn = false;
 
-	const ToggleModal = () => {
-		showModal = !showModal;
+	$: () => {
+		isLoggedIn = $userType !== -1;
 	};
-	let showModal = false;
 </script>
 
-<nav class="top-0 z-10 h-24 w-full bg-transparent bg-white p-2.5 shadow-xl">
-	<div class="container mx-auto flex h-full items-center justify-between">
-		<div class="flex items-center">
-			<a href="/"><img alt="logo" src="/logo.jpg" class="h-12 w-auto" /></a>
-			<div class="ml-4 text-4xl font-bold" style="color: #e1b42f;">
-				<a href="/" style="font-family: Sweaty;">CozyWear</a>
-			</div>
+<nav class="sticky top-0 z-10 w-full bg-white p-4 shadow-md">
+	<div class="container mx-auto flex items-center justify-between">
+		<div class="flex items-center space-x-4">
+			<a href="/" class="flex items-center space-x-2">
+				<img src="/src/lib/assets/images/logo.jpg" alt="CozyWear Logo" class="h-10 w-auto" />
+				<span class="text-2xl font-bold text-yellow-500">CozyWear</span>
+			</a>
 		</div>
-		<input
-			type="text"
-			placeholder="  Search..."
-			style="border-radius: 30px; border:1px solid black; width:500px; height:40px"
-		/>
-		<ul class="flex space-x-4">
-			<li><a href="/" class="text-sm text-black">Home</a></li>
-			<li><a href="/aboutus" class="text-sm text-black">About Us</a></li>
-			<li><a href="cozywear.pages.dev.#ser" class="text-sm text-black">Services</a></li>
-			<li>
-				<a href="/contactus" class="contact text-sm text-black" on:click={ToggleModal}>Contact Us</a
-				>
-			</li>
-			<li>
-				<a
-					href="/login"
-					id="Sign"
-					class={$userType != -1 ? 'hidden' : 'text-sm'}
-					style="color: #e1b42f">Login</a
-				>
-			</li>
-			<li>
-				<a
-					href="/register"
-					id="Sign"
-					class={$userType != -1 ? 'hidden' : 'text-sm'}
-					style="color: #e1b42f">Register</a
-				>
-			</li>
-			<li>
-				<a
-					href="/logout"
-					id="Sign"
-					class={$userType != -1 ? 'text-sm' : 'hidden'}
-					style="color: #e1b42f">Logout</a
-				>
-			</li>
-		</ul>
+
+		<div class="hidden max-w-md flex-1 px-4 lg:block">
+			<Input type="search" placeholder="Search..." class="w-full" />
+		</div>
+
+		<div class="hidden items-center space-x-4 lg:flex">
+			<a href="/" class="text-sm text-gray-600 hover:text-gray-900">Home</a>
+			<a href="/aboutus" class="text-sm text-gray-600 hover:text-gray-900">About Us</a>
+			<a href="#services" class="text-sm text-gray-600 hover:text-gray-900">Services</a>
+			<a href="/contactus">Contact Us</a>
+
+			{#if isLoggedIn}
+				<LogOut class="mr-2 h-4 w-4" />
+				<a href="/logout">Logout</a>
+			{:else}
+				<Button variant="outline">
+					<a href="/login">Login</a>
+				</Button>
+				<Button>
+					<a href="/register">Register</a>
+				</Button>
+			{/if}
+		</div>
+
+		<Sheet>
+			<SheetTrigger class="lg:hidden">
+				<Menu class="h-6 w-6" />
+			</SheetTrigger>
+			<SheetContent side="left">
+				<nav class="flex flex-col space-y-4">
+					<a href="/" class="text-sm text-gray-600 hover:text-gray-900">Home</a>
+					<a href="/aboutus" class="text-sm text-gray-600 hover:text-gray-900">About Us</a>
+					<a href="#services" class="text-sm text-gray-600 hover:text-gray-900">Services</a>
+					<a href="/contactus">Contact Us</a>
+					{#if isLoggedIn}
+						<Button variant="ghost">
+							<a href="/logout">Logout</a>
+						</Button>
+					{:else}
+						<Button variant="outline">
+							<a href="/login">Login</a>
+						</Button>
+						<Button>
+							<a href="/register">Register</a>
+						</Button>
+					{/if}
+				</nav>
+			</SheetContent>
+		</Sheet>
 	</div>
 </nav>

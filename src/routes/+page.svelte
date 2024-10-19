@@ -1,10 +1,9 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import Modal from '$lib/components/Modal.svelte';
 
 	onMount(() => {
 		let images = ['t1.jpg', 't2.jpg', 't3.jpg', 't4.jpg'];
-		let gallery = document.getElementById('combos');
+		let gallery = document.getElementById('combos')!;
 		for (var i = 0; i < images.length; i++) {
 			var img = document.createElement('img');
 			img.src = images[i];
