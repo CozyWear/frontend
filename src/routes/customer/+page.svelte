@@ -160,19 +160,6 @@
 </div>
 
 <h1 class="mt-8 text-center text-3xl font-semibold" style="color: #e1b42f; padding-top: 15px;">
-	Trending
-</h1>
-<p style="text-align: center; font-weight:300; padding: 15px 20px; font-size:16px;">
-	Stay ahead with our top trending items, handpicked for style and popularity. Discover what's hot
-	this season<br /> and update your wardrobe with the latest fashion must-haves.
-</p>
-<div class="flex items-center justify-center">
-	<button id="TleftArrow">←</button>
-	<div class="flex items-center justify-center" id="trending" style="padding: 15px 15px;"></div>
-	<button id="TrightArrow">→</button>
-</div>
-
-<h1 class="mt-8 text-center text-3xl font-semibold" style="color: #e1b42f; padding-top: 15px;">
 	Men
 </h1>
 <p style="text-align: center; font-weight:300; padding: 15px 20px; font-size:16px;">

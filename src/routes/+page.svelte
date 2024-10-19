@@ -19,8 +19,10 @@
 		class="flex h-96 w-full items-end justify-center bg-cover bg-center"
 		style="background-image: url('ps1.jpg');"
 	>
-		<button style="background-color: #e1b42f; margin-bottom: 20px;" class="rounded-3xl text-white"
-			>Customize Your Style</button
+		<button
+			style="background-color: #e1b42f; margin-bottom: 20px;"
+			class="rounded-3xl text-white"
+			on:click={() => (window.location.href = '/customer')}>Customize Your Style</button
 		>
 	</div>
 
