@@ -1,55 +1,39 @@
 <script lang="ts">
 	import { api_url } from '$lib/constants';
 	import { customer_id, tailor_id, merchant_id } from '$lib/constants';
+	import { Button } from '$lib/components/ui/button';
+	import { Input } from '$lib/components/ui/input';
+	import { Label } from '$lib/components/ui/label';
+	import { Alert, AlertDescription } from '$lib/components/ui/alert';
+	import { Eye, EyeOff } from 'lucide-svelte';
+	import { toast } from 'svelte-sonner';
 
-	let usertype: string,
-		name: string,
-		email: string,
-		password: string,
-		nameInputError: string,
-		emailInputError: string,
-		passwordInputError: string;
-	let showPassword: boolean = false;
+	let usertype: string;
+	let name = '';
+	let email = '';
+	let password = '';
+	let nameInputError = '';
+	let emailInputError = '';
+	let passwordInputError = '';
+	let showPassword = false;
 
 	function validateName() {
 		const nameRegex = /^[A-Za-z]+$/;
-
-		if (!nameRegex.test(name)) {
-			nameInputError = 'Name can only contain letters';
-		} else {
-			nameInputError = '';
-		}
+		nameInputError = !nameRegex.test(name) ? 'Name can only contain letters' : '';
 	}
 
 	function validateEmail() {
-		const gmailRegex = /^[a-zA-Z0-9.]+@gmail\.com$/;
-		const yahooRegex = /^[a-zA-Z0-9.]+@yahoo\.com$/;
-		const outlookRegex = /^[a-zA-Z0-9.]+@outlook\.com$/;
-		const protonmailRegex = /^[a-zA-Z0-9.]+@protonmail\.com$/;
-		const protonmeRegex = /^[a-zA-Z0-9.]+@proton\.me$/;
-
-		if (
-			!gmailRegex.test(email) &&
-			!yahooRegex.test(email) &&
-			!outlookRegex.test(email) &&
-			!protonmailRegex.test(email) &&
-			!protonmeRegex.test(email)
-		) {
-			emailInputError = 'Invalid email address. Please enter a valid email address';
-		} else {
-			emailInputError = '';
-		}
+		const emailRegex = /^[a-zA-Z0-9.]+@(gmail|yahoo|outlook|protonmail|proton)\.com$/;
+		emailInputError = !emailRegex.test(email)
+			? 'Invalid email address. Please enter a valid email address'
+			: '';
 	}
 
 	function validatePassword() {
 		const passwordRegex = /^(?=.*[!@#$%^&*()+\-_={}[\]:;'"<>,.?/|\\])(?=.*[0-9]).{1,16}$/;
-
-		if (!passwordRegex.test(password)) {
-			passwordInputError =
-				'Max length of 16 characters, with at least 1 number and 1 special character';
-		} else {
-			passwordInputError = '';
-		}
+		passwordInputError = !passwordRegex.test(password)
+			? 'Max length of 16 characters, with at least 1 number and 1 special character'
+			: '';
 	}
 
 	async function handleSubmit() {
@@ -60,7 +44,8 @@
 			password
 		};
 
-		if (!validateFormData(formData)) {
+		if (!name || !email || !password || nameInputError || emailInputError || passwordInputError) {
+			toast.error('All fields are required and need to be valid.');
 			return;
 		}
 
@@ -68,32 +53,19 @@
 			const response = await fetch(`${api_url}/accounts/register`, {
 				method: 'POST',
 				headers: {
-					'Content-Type': 'application/json' // Corrected semicolon
+					'Content-Type': 'application/json'
 				},
 				body: JSON.stringify(formData)
 			});
 
 			if (response.status === 201) {
-				console.log('Signup successful!', response.body); // Log success and the response
+				toast.success('Signup successful!');
 			} else {
-				console.error('Signup failed:', response.statusText);
+				toast.error('Signup failed: ' + response.statusText);
 			}
 		} catch (error) {
-			console.error('Error signing up:', error);
+			toast.error('Error signing up: ' + error);
 		}
-	}
-
-	function validateFormData(formData: any) {
-		if (!formData.name || !formData.email || !formData.password) {
-			alert('All fields are required and need to be valid.');
-			return false;
-		}
-
-		return true;
-	}
-
-	function togglePasswordVisibility() {
-		showPassword = !showPassword;
 	}
 </script>
 
@@ -110,107 +82,71 @@
 		<h1 class="text-center text-3xl font-bold">Register</h1>
 	</header>
 	<form
-		class="mb-4 mt-10 w-1/3 rounded bg-white px-8 pb-8 pt-6 shadow-md"
+		class="mb-4 mt-10 w-full max-w-md rounded bg-white px-8 pb-8 pt-6 shadow-md"
 		on:submit|preventDefault={handleSubmit}
 	>
-		<label class="mb-2 block text-sm font-bold text-gray-700" for="usertype">What are you:</label>
-		<select
-			class="focus:shadow-outline mb-4 w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
-			id="usertype"
-			bind:value={usertype}
-		>
-			<option value={customer_id}>A Customer</option>
-			<option value={tailor_id}>A Tailor</option>
-			<option value={merchant_id}>A Merchant</option>
-		</select>
+		<div class="mb-6">
+			<label class="mb-2 block text-sm font-bold text-gray-700" for="userType">What are you</label>
+			<select
+				class="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
+				id="userType"
+				bind:value={usertype}
+			>
+				<option value={customer_id}>A Customer</option>
+				<option value={tailor_id}>A Tailor</option>
+				<option value={merchant_id}>A Merchant</option>
+			</select>
+		</div>
 
-		<label class="mb-2 block text-sm font-bold text-gray-700" for="firstname">Name:</label>
-		<input
-			class="focus:shadow-outline mb-4 w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
-			type="text"
-			id="firstname"
-			bind:value={name}
-			on:input={validateName}
-			required
-		/>
-		{#if nameInputError}
-			<p class="text-xs italic text-red-500">{nameInputError}</p>
-		{/if}
-
-		<label class="mb-2 block text-sm font-bold text-gray-700" for="email">Email:</label>
-		<input
-			class="focus:shadow-outline mb-4 w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
-			type="email"
-			id="email"
-			bind:value={email}
-			on:input={validateEmail}
-			required
-		/>
-		{#if emailInputError}
-			<p class="text-xs italic text-red-500">{emailInputError}</p>
-		{/if}
-
-		<label class="mb-2 block text-sm font-bold text-gray-700" for="password">Password:</label>
-		<div class="relative">
-			{#if showPassword}
-				<input
-					class="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 pr-10 leading-tight text-gray-700 shadow focus:outline-none"
-					id="password"
-					type="text"
-					bind:value={password}
-					on:input={validatePassword}
-					required
-				/>
-			{:else}
-				<input
-					class="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 pr-10 leading-tight text-gray-700 shadow focus:outline-none"
-					id="password"
-					type="password"
-					bind:value={password}
-					on:input={validatePassword}
-					required
-				/>
+		<div class="mb-4">
+			<Label for="name">Name:</Label>
+			<Input type="text" id="name" bind:value={name} on:input={validateName} required />
+			{#if nameInputError}
+				<Alert variant="destructive" class="mt-2">
+					<AlertDescription>{nameInputError}</AlertDescription>
+				</Alert>
 			{/if}
-			<div class="absolute right-2 top-1.5">
-				<svg
-					xmlns="http://www.w3.org/2000/svg"
-					class="h-6 w-6"
-					stroke-width="1.5"
-					fill="none"
-					viewBox="0 0 24 24"
-					stroke="currentColor"
-					on:click={togglePasswordVisibility}
-					aria-label="Toggle password visibility"
+		</div>
+
+		<div class="mb-4">
+			<Label for="email">Email:</Label>
+			<Input type="email" id="email" bind:value={email} on:input={validateEmail} required />
+			{#if emailInputError}
+				<Alert variant="destructive" class="mt-2">
+					<AlertDescription>{emailInputError}</AlertDescription>
+				</Alert>
+			{/if}
+		</div>
+
+		<div class="mb-4">
+			<Label for="password">Password:</Label>
+			<div class="relative">
+				<Input
+					type={showPassword ? 'text' : 'password'}
+					id="password"
+					bind:value={password}
+					on:input={validatePassword}
+					required
+				/>
+				<button
+					type="button"
+					class="absolute right-2 top-1/2 -translate-y-1/2"
+					on:click={() => (showPassword = !showPassword)}
 				>
 					{#if showPassword}
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-						/>
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z"
-						/>
+						<EyeOff class="h-5 w-5" />
 					{:else}
-						<path
-							stroke-linecap="round"
-							stroke-linejoin="round"
-							d="M3.98 8.223A10.477 10.477 0 0 0 1.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.451 10.451 0 0 1 12 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 0 1-4.293 5.774M6.228 6.228 3 3m3.228 3.228 3.65 3.65m7.894 7.894L21 21m-3.228-3.228-3.65-3.65m0 0a3 3 0 1 0-4.243-4.243m4.242 4.242L9.88 9.88"
-						/>
+						<Eye class="h-5 w-5" />
 					{/if}
-				</svg>
+				</button>
 			</div>
+			{#if passwordInputError}
+				<Alert variant="destructive" class="mt-2">
+					<AlertDescription>{passwordInputError}</AlertDescription>
+				</Alert>
+			{/if}
 		</div>
-		{#if passwordInputError}
-			<p class="text-xs italic text-red-500">{passwordInputError}</p>
-		{/if}
 
-		<button
-			class="focus:shadow-outline w-full rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none"
-			style="margin-top: 20px;"
-			type="submit">Sign Up</button
-		>
+		<Button class="w-full" type="submit">Sign Up</Button>
 	</form>
 </div>
