@@ -21,8 +21,10 @@
 		"@typescript-eslint/eslint-plugin": "^8.10.0",
 		"@typescript-eslint/parser": "^8.10.0",
 		"autoprefixer": "^10.4.20",
+		"bits-ui": "^0.21.16",
 		"clsx": "^2.1.1",
 		"cssnano": "^7.0.1",
+		"embla-carousel-svelte": "^8.3.0",
 		"eslint": "^9.13.0",
 		"eslint-config-prettier": "^9.1.0",
 		"eslint-plugin-svelte": "^2.35.1",
@@ -32,6 +34,7 @@
 		"prettier-plugin-tailwindcss": "^0.6.5",
 		"svelte": "^4.2.19",
 		"svelte-check": "^4.0.5",
+		"svelte-radix": "^1.1.1",
 		"tailwind-merge": "^2.5.4",
 		"tailwind-variants": "^0.2.1",
 		"tailwindcss": "^3.4.9",
@@ -47,7 +50,6 @@
 		"workerd"
 	],
 	"dependencies": {
-		"bits-ui": "^0.21.16",
 		"lucide-svelte": "^0.453.0",
 		"svelte-sonner": "^0.3.28"
 	}
