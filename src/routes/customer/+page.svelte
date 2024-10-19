@@ -147,9 +147,8 @@
 	});
 </script>
 
-
 <div
-	class="bg-cover bg-center h-96 mt-1 w-full flex items-end justify-center"
+	class="mt-1 flex h-96 w-full items-end justify-center bg-cover bg-center"
 	style="background-image: url('ps1.jpg'); margin:0;"
 >
 	<button
@@ -160,44 +159,44 @@
 	</button>
 </div>
 
-<h1 class="text-center text-3xl font-semibold mt-8" style="color: #e1b42f; padding-top: 15px;">
+<h1 class="mt-8 text-center text-3xl font-semibold" style="color: #e1b42f; padding-top: 15px;">
 	Trending
 </h1>
 <p style="text-align: center; font-weight:300; padding: 15px 20px; font-size:16px;">
 	Stay ahead with our top trending items, handpicked for style and popularity. Discover what's hot
 	this season<br /> and update your wardrobe with the latest fashion must-haves.
 </p>
-<div class="flex justify-center items-center">
+<div class="flex items-center justify-center">
 	<button id="TleftArrow">←</button>
-	<div class="flex justify-center items-center" id="trending" style="padding: 15px 15px;"></div>
+	<div class="flex items-center justify-center" id="trending" style="padding: 15px 15px;"></div>
 	<button id="TrightArrow">→</button>
 </div>
 
-<h1 class="text-center text-3xl font-semibold mt-8" style="color: #e1b42f; padding-top: 15px;">
+<h1 class="mt-8 text-center text-3xl font-semibold" style="color: #e1b42f; padding-top: 15px;">
 	Men
 </h1>
 <p style="text-align: center; font-weight:300; padding: 15px 20px; font-size:16px;">
 	Explore our exclusive men's collection, crafted for the modern man. <br />From casual wear to
 	formal attire, find the perfect outfit for any occasion.
 </p>
-<div class="flex justify-center items-center">
+<div class="flex items-center justify-center">
 	<button id="MleftArrow">←</button>
-	<div class="flex justify-center items-center" id="men" style="padding: 15px 15px;"></div>
+	<div class="flex items-center justify-center" id="men" style="padding: 15px 15px;"></div>
 	<button id="MrightArrow">→</button>
 </div>
-<h1 class="text-center text-3xl font-semibold mt-8" style="color: #e1b42f; padding-top: 15px;">
+<h1 class="mt-8 text-center text-3xl font-semibold" style="color: #e1b42f; padding-top: 15px;">
 	Kids
 </h1>
 <p style="text-align: center; font-weight:300; padding: 15px 20px; font-size:16px;">
 	Find the cutest outfits for your little ones in our vibrant kids' section. From playful patterns
 	to<br /> comfortable designs, our collection ensures your kids look stylish and feel great
 </p>
-<div class="flex justify-center items-center">
+<div class="flex items-center justify-center">
 	<button id="KleftArrow">←</button>
-	<div class="flex justify-center items-center" id="kid" style="padding: 15px 15px;"></div>
+	<div class="flex items-center justify-center" id="kid" style="padding: 15px 15px;"></div>
 	<button id="KrightArrow">→</button>
 </div>
-<h1 class="text-center text-3xl font-semibold mt-8" style="color: #e1b42f; padding-top: 15px;">
+<h1 class="mt-8 text-center text-3xl font-semibold" style="color: #e1b42f; padding-top: 15px;">
 	Women
 </h1>
 <p style="text-align: center; font-weight:300; padding: 15px 20px; font-size:16px;">
@@ -205,9 +204,9 @@
 	our pieces are designed to make you stand out. Discover new arrivals and timeless classics that define
 	your personal style
 </p>
-<div class="flex justify-center items-center">
+<div class="flex items-center justify-center">
 	<button id="WleftArrow">←</button>
-	<div class="flex justify-center items-center" id="women" style="padding: 15px 15px;"></div>
+	<div class="flex items-center justify-center" id="women" style="padding: 15px 15px;"></div>
 	<button id="WrightArrow">→</button>
 </div>
 
@@ -219,4 +218,3 @@
 	fit={popupFit}
 	on:close={() => (showPopup = false)}
 />
-

@@ -5,7 +5,7 @@
 	};
 </script>
 
-<main class="max-w-8xl mx-auto p-8 bg-[#f2ece1] h-2/3">
+<main class="max-w-8xl mx-auto h-2/3 bg-[#f2ece1] p-8">
 	<!-- <nav class="mb-8 flex justify-between items-center">
 			<div>
 				<a
@@ -31,10 +31,10 @@
 			</div>
 		</nav> -->
 	<header class="py-4">
-		<h1 class="text-3xl font-bold text-center">About Us</h1>
+		<h1 class="text-center text-3xl font-bold">About Us</h1>
 	</header>
-	<section class="mb-8 w-1/2 mx-auto">
-		<h2 class="text-xl font-semibold mb-4 text-center">Welcome to CozyWear!</h2>
+	<section class="mx-auto mb-8 w-1/2">
+		<h2 class="mb-4 text-center text-xl font-semibold">Welcome to CozyWear!</h2>
 		<p class="mb-2 text-justify">
 			Welcome to our world of bespoke elegance, where the artistry of our merchants and tailors
 			intertwines to create a symphony of style and substance. Here, the journey of sartorial

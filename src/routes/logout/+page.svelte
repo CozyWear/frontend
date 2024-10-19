@@ -14,7 +14,7 @@
 	import { goto } from '$app/navigation';
 	import { userType } from '../store';
 
-	let isLoading = $state(false);
+	let isLoading = false;
 
 	function handleLogout() {
 		isLoading = true;
