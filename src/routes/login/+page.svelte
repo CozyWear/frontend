@@ -27,7 +27,6 @@
 			});
 
 			if (response.ok) {
-				console.log(response.json());
 				switch (parseInt(usertype)) {
 					case 0:
 						goto('/customer').then();
@@ -44,9 +43,6 @@
 					default:
 						console.log('Invalid user type');
 				}
-				userType.subscribe((value) => {
-					console.log(value);
-				});
 			} else {
 				console.log('Invalid Email/Password');
 				console.log(response);

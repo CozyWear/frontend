@@ -13,17 +13,37 @@
 	import { Toaster, toast } from 'svelte-sonner';
 	import { goto } from '$app/navigation';
 	import { userType } from '../store';
+	import { get } from 'svelte/store';
+	import { onMount } from 'svelte';
+	import { api_url } from '$lib/constants';
+
+	onMount(() => {
+		if (get(userType) == -1) {
+			goto('/');
+		}
+	});
 
 	let isLoading = false;
-
-	function handleLogout() {
+	async function handleLogout() {
 		isLoading = true;
-		setTimeout(() => {
-			isLoading = false;
-			toast('You have been successfully logged out.');
+
+		try {
+			const response = await fetch(`${api_url}/accounts/logout`, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			});
+
+			if (response.ok) {
+				toast.success('You have been successfully logged out.');
+				goto('/');
+			}
+		} catch (e) {
+			toast.error('Failed to logout');
 			goto('/');
-			userType.set(-1);
-		}, 2000);
+		}
+		userType.set(-1);
 	}
 </script>
 
