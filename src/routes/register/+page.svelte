@@ -1,14 +1,12 @@
 <script lang="ts">
 	import { api_url } from '$lib/constants';
 	import { customer_id, tailor_id, merchant_id } from '$lib/constants';
-	import { onMount } from 'svelte';
 
 	let usertype: string,
 		name: string,
 		email: string,
 		password: string,
 		nameInputError: string,
-		phoneInputError: string,
 		emailInputError: string,
 		passwordInputError: string;
 	let showPassword: boolean = false;
@@ -17,7 +15,7 @@
 		const nameRegex = /^[A-Za-z]+$/;
 
 		if (!nameRegex.test(name)) {
-			nameInputError = 'First name can only contain letters.';
+			nameInputError = 'Name can only contain letters';
 		} else {
 			nameInputError = '';
 		}
@@ -93,13 +91,10 @@
 
 		return true;
 	}
+
 	function togglePasswordVisibility() {
 		showPassword = !showPassword;
 	}
-
-	onMount(() => {
-		togglePasswordVisibility();
-	});
 </script>
 
 <svelte:head>
@@ -135,6 +130,7 @@
 			type="text"
 			id="firstname"
 			bind:value={name}
+			on:input={validateName}
 			required
 		/>
 		{#if nameInputError}
@@ -160,7 +156,7 @@
 				<input
 					class="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 pr-10 leading-tight text-gray-700 shadow focus:outline-none"
 					id="password"
-					type="password"
+					type="text"
 					bind:value={password}
 					on:input={validatePassword}
 					required
@@ -169,7 +165,7 @@
 				<input
 					class="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 pr-10 leading-tight text-gray-700 shadow focus:outline-none"
 					id="password"
-					type="text"
+					type="password"
 					bind:value={password}
 					on:input={validatePassword}
 					required
@@ -190,12 +186,12 @@
 						<path
 							stroke-linecap="round"
 							stroke-linejoin="round"
-							d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z"
+							d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
 						/>
 						<path
 							stroke-linecap="round"
 							stroke-linejoin="round"
-							d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+							d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z"
 						/>
 					{:else}
 						<path
