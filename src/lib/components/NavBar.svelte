@@ -16,7 +16,7 @@
 	<div class="container mx-auto flex items-center justify-between">
 		<div class="flex items-center space-x-4">
 			<a href="/" class="flex items-center space-x-2">
-				<img src="/src/lib/assets/images/logo.jpg" alt="CozyWear Logo" class="h-10 w-auto" />
+				<img src="logo.jpg" alt="CozyWear Logo" class="h-10 w-auto" />
 				<span class="text-2xl font-bold text-yellow-500">CozyWear</span>
 			</a>
 		</div>
