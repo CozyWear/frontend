@@ -59,9 +59,9 @@
 							<a href="/logout">Logout</a>
 						</Button>
 					{:else}
-						<Button variant="outline">
-							<a href="/login">Login</a>
-						</Button>
+						<Button variant="outline" on:click={() => (window.location.href = '/login')}
+							>Login</Button
+						>
 						<Button>
 							<a href="/register">Register</a>
 						</Button>

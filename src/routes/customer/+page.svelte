@@ -4,7 +4,7 @@
 </script>
 
 <div
-	class="relative h-screen w-full bg-cover bg-center bg-no-repeat sm:h-96"
+	class="flex h-64 w-full items-end justify-center bg-cover bg-center sm:h-96"
 	style="background-image: url('ps1.jpg');"
 >
 	<div class="absolute inset-0 flex items-end justify-center p-4">
