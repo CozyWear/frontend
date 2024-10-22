@@ -5,6 +5,7 @@
 	import { api_url, customer_id, tailor_id, merchant_id } from '$lib/constants';
 	import { Eye, EyeOff } from 'lucide-svelte';
 	import { userType } from '../store';
+	import { get } from 'svelte/store';
 
 	let email: string;
 	let password: string;
@@ -28,16 +29,21 @@
 			});
 
 			if (response.ok) {
-				userType.set(parseInt(usertype));
+				const user_type: number = await response.json().then((data) => {
+					const userType = data.user_type;
+					return userType;
+				});
+
+				userType.set(user_type);
 				switch (parseInt(usertype)) {
 					case 0:
-						goto('/customer');
+						goto('/customer').then();
 						break;
 					case 1:
-						goto('/tailor');
+						goto('/tailor').then();
 						break;
 					case 2:
-						goto('/merchant');
+						goto('/merchant').then();
 						break;
 					default:
 						throw new Error('Invalid user type');

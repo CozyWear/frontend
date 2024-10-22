@@ -18,7 +18,7 @@
 	import { api_url } from '$lib/constants';
 
 	onMount(() => {
-		if (get(userType) == -1) {
+		if (get(userType) === '-1') {
 			goto('/');
 		}
 	});
@@ -37,13 +37,13 @@
 
 			if (response.ok) {
 				toast.success('You have been successfully logged out.');
-				goto('/');
 			}
 		} catch (e) {
 			toast.error('Failed to logout');
+		} finally {
+			userType.set('-1');
 			goto('/');
 		}
-		userType.set(-1);
 	}
 </script>
 

@@ -3,13 +3,13 @@
 	import { Input } from '$lib/components/ui/input';
 	import { Sheet, SheetContent, SheetTrigger } from '$lib/components/ui/sheet';
 	import { Menu, LogOut } from 'lucide-svelte';
+	import { goto } from '$app/navigation';
 	import { userType } from '../../routes/store';
 
-	let isLoggedIn = false;
-
-	$: () => {
-		isLoggedIn = $userType !== -1;
-	};
+	let loggedIn = false;
+	userType.subscribe((value) => {
+		loggedIn = value != -1;
+	});
 </script>
 
 <nav class="sticky top-0 z-10 w-full bg-white p-4 shadow-md">
@@ -30,16 +30,12 @@
 			<a href="/aboutus" class="text-sm text-gray-600 hover:text-gray-900">About Us</a>
 			<a href="/contactus" class="text-sm text-gray-600 hover:text-gray-900">Contact Us</a>
 
-			{#if isLoggedIn}
+			{#if loggedIn}
 				<LogOut class="mr-2 h-4 w-4" />
-				<a href="/logout">Logout</a>
+				<Button variant="ghost" on:click={() => goto('/logout')}>Logout</Button>
 			{:else}
-				<Button variant="outline">
-					<a href="/login">Login</a>
-				</Button>
-				<Button>
-					<a href="/register">Register</a>
-				</Button>
+				<Button variant="outline" on:click={() => goto('/login')}>Login</Button>
+				<Button on:click={() => goto('/register')}>Register</Button>
 			{/if}
 		</div>
 
@@ -52,17 +48,11 @@
 					<a href="/" class="text-sm text-gray-600 hover:text-gray-900">Home</a>
 					<a href="/aboutus" class="text-sm text-gray-600 hover:text-gray-900">About Us</a>
 					<a href="/contactus" class="text-sm text-gray-600 hover:text-gray-900">Contact Us</a>
-					{#if isLoggedIn}
-						<Button variant="ghost">
-							<a href="/logout">Logout</a>
-						</Button>
+					{#if loggedIn}
+						<Button variant="ghost" on:click={() => goto('/logout')}>Logout</Button>
 					{:else}
-						<Button variant="outline" on:click={() => (window.location.href = '/login')}
-							>Login</Button
-						>
-						<Button>
-							<a href="/register">Register</a>
-						</Button>
+						<Button variant="outline" on:click={() => goto('/login')}>Login</Button>
+						<Button on:click={() => goto('/register')}>Register</Button>
 					{/if}
 				</nav>
 			</SheetContent>

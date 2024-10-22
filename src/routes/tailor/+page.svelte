@@ -1,6 +1,4 @@
 <script lang="ts">
-	import NavBar from '$lib/components/NavBar.svelte';
-	import ViewCard from '$lib/components/ViewCard.svelte';
 	import type { ViewAttribute } from '$lib/components/ViewCard.svelte';
 
 	const attributes: ViewAttribute[] = [
@@ -16,14 +14,11 @@
 </script>
 
 <div class="page-container">
-	<NavBar />
-
 	<div class="content-wrapper">
 		<div class="main-content">
 			<a id="add-button" href="/tailor/add-item">+</a>
 			{#each cards as card}
 				{@const image = { url: 'fabric.jpg', name: '' }}
-				<ViewCard {attributes} {image} />
 			{/each}
 		</div>
 	</div>
