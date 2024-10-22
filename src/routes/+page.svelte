@@ -37,7 +37,7 @@
 		>
 	</div>
 
-	<h1 class="mt-8 text-center text-2xl font-semibold text-[#e1b42f] sm:text-3xl">Popular Combos</h1>
+	<h1 class="mt-8 text-center text-2xl font-semibold text-[#e1b42f] sm:text-3xl">Popular Styles</h1>
 	<p class="px-4 py-4 text-center text-sm font-light sm:px-20 sm:text-base">
 		In today's fast-paced world, convenience is key. At CozyWear, our popular combos are designed to
 		provide you with stylish and coordinated outfits,<br /> all from the comfort of your home.

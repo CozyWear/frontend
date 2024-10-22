@@ -28,7 +28,6 @@
 		<div class="hidden items-center space-x-4 lg:flex">
 			<a href="/" class="text-sm text-gray-600 hover:text-gray-900">Home</a>
 			<a href="/aboutus" class="text-sm text-gray-600 hover:text-gray-900">About Us</a>
-			<a href="#services" class="text-sm text-gray-600 hover:text-gray-900">Services</a>
 			<a href="/contactus" class="text-sm text-gray-600 hover:text-gray-900">Contact Us</a>
 
 			{#if isLoggedIn}
@@ -52,7 +51,6 @@
 				<nav class="flex flex-col space-y-4">
 					<a href="/" class="text-sm text-gray-600 hover:text-gray-900">Home</a>
 					<a href="/aboutus" class="text-sm text-gray-600 hover:text-gray-900">About Us</a>
-					<a href="#services" class="text-sm text-gray-600 hover:text-gray-900">Services</a>
 					<a href="/contactus" class="text-sm text-gray-600 hover:text-gray-900">Contact Us</a>
 					{#if isLoggedIn}
 						<Button variant="ghost">
