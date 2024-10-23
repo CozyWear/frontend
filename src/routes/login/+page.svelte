@@ -1,51 +1,52 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import Input from '$lib/components/ui/input/input.svelte';
-	import Label from '$lib/components/ui/label/label.svelte';
-	import { api_url, customer_id, tailor_id, merchant_id } from '$lib/constants';
+	import { Button } from '$lib/components/ui/button';
+	import { Input } from '$lib/components/ui/input';
+	import { Label } from '$lib/components/ui/label';
+	import { Alert, AlertDescription } from '$lib/components/ui/alert';
+	import { api_url, userTypes } from '$lib/constants';
 	import { Eye, EyeOff } from 'lucide-svelte';
-	import { userType } from '../store';
-	import { get } from 'svelte/store';
+	import { toast } from 'svelte-sonner';
 
-	let email: string;
-	let password: string;
-	let usertype: string;
-	let showPassword = false;
-	let error = '';
+	let email = $state('');
+	let password = $state('');
+	let usertype = $state(-1);
+	let showPassword = $state(false);
+	let error = $state('');
 
 	async function handleSubmit() {
 		error = '';
 		const formData = {
 			email,
 			password,
-			usertype: parseInt(usertype)
+			usertype: usertype
 		};
 
 		try {
 			const response = await fetch(`${api_url}/accounts/login`, {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify(formData)
+				body: JSON.stringify(formData),
+				credentials: 'include'
 			});
 
 			if (response.ok) {
-				const user_type: number = await response.json().then((data) => {
-					const userType = data.user_type;
-					return userType;
-				});
+				setTimeout(() => {
+					toast.success('Logged In Successfully');
+				}, 1000);
 
-				userType.set(user_type);
-				switch (parseInt(usertype)) {
+				switch (usertype) {
 					case 0:
-						goto('/customer').then();
+						goto('/customer');
 						break;
 					case 1:
-						goto('/tailor').then();
+						goto('/tailor');
 						break;
 					case 2:
-						goto('/merchant').then();
+						goto('/merchant');
 						break;
 					default:
+						goto('/');
 						throw new Error('Invalid user type');
 				}
 			} else {
@@ -56,6 +57,7 @@
 				error = err.message;
 			} else {
 				error = 'An unexpected error occurred';
+				toast.error('Unable to log in');
 			}
 		}
 	}
@@ -73,66 +75,54 @@
 	<h1 class="mb-6 text-3xl font-bold">Login</h1>
 	<form
 		class="w-full max-w-md rounded-lg bg-white p-6 shadow-md"
-		on:submit|preventDefault={handleSubmit}
+		onsubmit={(e) => {
+			e.preventDefault();
+			handleSubmit();
+		}}
 	>
 		{#if error}
-			<div
-				class="relative mb-4 rounded border border-red-400 bg-red-100 px-4 py-3 text-red-700"
-				role="alert"
-			>
-				<span class="block sm:inline">{error}</span>
-			</div>
+			<Alert variant="destructive" class="mb-4">
+				<AlertDescription>{error}</AlertDescription>
+			</Alert>
 		{/if}
-		<div class="mb-4">
-			<label class="mb-2 block text-sm font-bold text-gray-700" for="email">Email</label>
-			<input
-				class="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
-				id="email"
-				type="email"
-				bind:value={email}
-				required
-			/>
-		</div>
-		<div class="mb-4">
-			<Label for="password">Password:</Label>
-			<div class="relative">
-				<Input
-					type={showPassword ? 'text' : 'password'}
-					id="password"
-					bind:value={password}
-					required
-				/>
-				<button
-					type="button"
-					class="absolute right-2 top-1/2 -translate-y-1/2"
-					on:click={() => (showPassword = !showPassword)}
-				>
-					{#if !showPassword}
-						<EyeOff class="h-5 w-5" />
-					{:else}
-						<Eye class="h-5 w-5" />
-					{/if}
-				</button>
+		<div class="space-y-4">
+			<div class="space-y-2">
+				<Label for="email">Email</Label>
+				<Input id="email" type="email" bind:value={email} required />
 			</div>
-		</div>
-
-		<div class="mb-6">
-			<label class="mb-2 block text-sm font-bold text-gray-700" for="userType">What are you</label>
-			<select
-				class="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
-				id="userType"
-				bind:value={usertype}
-			>
-				<option value={customer_id}>A Customer</option>
-				<option value={tailor_id}>A Tailor</option>
-				<option value={merchant_id}>A Merchant</option>
-			</select>
-		</div>
-		<div class="flex items-center justify-between">
-			<button
-				class="focus:shadow-outline w-full rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700 focus:outline-none"
-				type="submit">Login</button
-			>
+			<div class="space-y-2">
+				<Label for="password">Password</Label>
+				<div class="relative">
+					<Input
+						type={showPassword ? 'text' : 'password'}
+						id="password"
+						bind:value={password}
+						required
+					/>
+					<Button
+						type="button"
+						variant="ghost"
+						class="absolute right-2 top-1/2 -translate-y-1/2"
+						onclick={() => (showPassword = !showPassword)}
+					>
+						{#if !showPassword}
+							<EyeOff class="h-4 w-4" />
+						{:else}
+							<Eye class="h-4 w-4" />
+						{/if}
+					</Button>
+				</div>
+			</div>
+			<div class="space-y-2">
+				<label for="userType">What are you</label>
+				<select bind:value={usertype} class="w-full rounded border border-gray-300 p-2">
+					<option value="" disabled selected>User Type</option>
+					{#each userTypes as [type, value]}
+						<option {value}>{type}</option>
+					{/each}
+				</select>
+			</div>
+			<Button type="submit" class="w-full">Login</Button>
 		</div>
 	</form>
 </div>

@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 
-	let name = '';
-	let email = '';
-	let phone = '';
-	let subject = '';
-	let message = '';
-	let submitted = false;
+	let name = $state('');
+	let email = $state('');
+	let phone = $state('');
+	let subject = $state('');
+	let message = $state('');
+	let submitted = $state(false);
 
 	function handleSubmit(event) {
 		event.preventDefault();
@@ -36,7 +36,7 @@
 						Thank you for contacting us! We will get back to you shortly.
 					</p>
 				{/if}
-				<form on:submit={handleSubmit}>
+				<form onsubmit={handleSubmit}>
 					<div class="form-group">
 						<label for="name">Name:</label>
 						<input type="text" id="name" bind:value={name} required />

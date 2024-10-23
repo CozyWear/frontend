@@ -33,7 +33,7 @@
 	<div class="content-wrapper">
 		<div class="main-content">
 			<div class="image-box">
-				<a id="add-button" on:click={addImage}>+</a>
+				<a id="add-button" onclick={addImage}>+</a>
 			</div>
 			<div class="item-details">
 				{#each attributes as attribute, index}
@@ -43,7 +43,7 @@
 						<!-- <span></span> -->
 					</div>
 				{/each}
-				<button on:click={saveItem} class="save-button">Save item</button>
+				<button onclick={saveItem} class="save-button">Save item</button>
 			</div>
 		</div>
 	</div>

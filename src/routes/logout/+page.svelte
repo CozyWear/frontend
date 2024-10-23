@@ -10,20 +10,20 @@
 	} from '$lib/components/ui/card';
 	import { CircleAlert } from 'lucide-svelte';
 	import { Alert, AlertDescription, AlertTitle } from '$lib/components/ui/alert';
-	import { Toaster, toast } from 'svelte-sonner';
+	import { toast } from 'svelte-sonner';
 	import { goto } from '$app/navigation';
-	import { userType } from '../store';
-	import { get } from 'svelte/store';
-	import { onMount } from 'svelte';
 	import { api_url } from '$lib/constants';
+	import { onMount } from 'svelte';
+	import { getCookie } from '$lib/helpers';
 
+	let isLoading = false;
 	onMount(() => {
-		if (get(userType) === '-1') {
+		const userType = getCookie('userType');
+		if (userType === '-1' || userType === undefined) {
 			goto('/');
 		}
 	});
 
-	let isLoading = false;
 	async function handleLogout() {
 		isLoading = true;
 
@@ -37,12 +37,14 @@
 
 			if (response.ok) {
 				toast.success('You have been successfully logged out.');
+				goto('/');
+			} else {
+				toast.error('Failed to logout');
 			}
 		} catch (e) {
-			toast.error('Failed to logout');
+			toast.error('An error occurred during logout. Please try again.');
 		} finally {
-			userType.set('-1');
-			goto('/');
+			isLoading = false;
 		}
 	}
 </script>
@@ -57,13 +59,13 @@
 			<Alert variant="destructive">
 				<CircleAlert class="h-4 w-4" />
 				<AlertTitle>Warning</AlertTitle>
-				<AlertDescription
-					>Logging out will end your current session. Make sure you've saved any important work.</AlertDescription
-				>
+				<AlertDescription>
+					Logging out will end your current session. Make sure you've saved any important work.
+				</AlertDescription>
 			</Alert>
 		</CardContent>
 		<CardFooter class="flex justify-between">
-			<Button variant="outline" on:click={() => history.back()}>Cancel</Button>
+			<Button variant="outline" on:click={() => history.back()} disabled={isLoading}>Cancel</Button>
 			<Button variant="destructive" on:click={handleLogout} disabled={isLoading}>
 				{#if isLoading}
 					Logging out...
@@ -74,5 +76,3 @@
 		</CardFooter>
 	</Card>
 </div>
-
-<Toaster />

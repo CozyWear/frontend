@@ -1,4 +1,4 @@
-<script context="module" lang="ts">
+<script module lang="ts">
 	export type ViewAttribute = {
 		name: string;
 	};
@@ -12,12 +12,16 @@
 <script lang="ts">
 	import { writable } from 'svelte/store';
 
-	export let attributes: ViewAttribute[];
-	export let image: Image;
-	export let onDelete: () => void; // onDelete function declared as a prop
+	interface Props {
+		attributes: ViewAttribute[];
+		image: Image;
+		onDelete: () => void;
+	}
+
+	let { attributes, image, onDelete }: Props = $props();
 
 	let isEditing = writable(false);
-	let inputValues: string[] = []; // values take from API
+	let inputValues: string[] = $state([]); // values take from API
 
 	function toggleEdit() {
 		isEditing.update((value) => !value);
@@ -52,14 +56,14 @@
 		</div>
 	{/each}
 	<div class="button-group">
-		<button on:click={toggleEdit} class="edit-button">
+		<button onclick={toggleEdit} class="edit-button">
 			{#if $isEditing}
 				Save
 			{:else}
 				Edit
 			{/if}
 		</button>
-		<button on:click={handleDelete} class="delete-button">Delete</button>
+		<button onclick={handleDelete} class="delete-button">Delete</button>
 	</div>
 </div>
 

@@ -1,5 +1,4 @@
 <script lang="ts">
-	import NavBar from '$lib/components/NavBar.svelte';
 	import ViewCard from '$lib/components/ViewCard.svelte';
 	import type { ViewAttribute } from '$lib/components/ViewCard.svelte';
 
@@ -15,8 +14,6 @@
 </script>
 
 <div class="page-container">
-	<NavBar />
-
 	<div class="content-wrapper">
 		<div class="main-content">
 			<a id="add-button" href="/merchant/add-item">+</a>

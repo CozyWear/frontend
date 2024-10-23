@@ -1,13 +1,26 @@
 <script lang="ts">
+	import { createBubbler, stopPropagation } from 'svelte/legacy';
+
+	const bubble = createBubbler();
 	import { goto } from '$app/navigation';
 	import { createEventDispatcher } from 'svelte';
 	const dispatch = createEventDispatcher();
 
-	export let show = false;
-	export let imageSrc = '';
-	export let Design = '';
-	export let name = '';
-	export let fit = '';
+	interface Props {
+		show?: boolean;
+		imageSrc?: string;
+		Design?: string;
+		name?: string;
+		fit?: string;
+	}
+
+	let {
+		show = $bindable(false),
+		imageSrc = '',
+		Design = '',
+		name = '',
+		fit = ''
+	}: Props = $props();
 
 	function navigation() {
 		goto('/customize');
@@ -19,8 +32,8 @@
 </script>
 
 {#if show}
-	<div class="popup" on:click={close}>
-		<div class="popup-content" on:click|stopPropagation>
+	<div class="popup" onclick={close}>
+		<div class="popup-content" onclick={stopPropagation(bubble('click'))}>
 			<div>
 				<img class="popup-image" src={imageSrc} alt="Popup Image" />
 			</div>
@@ -28,7 +41,7 @@
 				<h2 class="popup-title">Design: {Design}</h2>
 				<p>Name: {name}</p>
 				<p>Fit Type: {fit}</p>
-				<button id="btn" on:click={navigation}>Customize</button>
+				<button id="btn" onclick={navigation}>Customize</button>
 			</div>
 		</div>
 	</div>

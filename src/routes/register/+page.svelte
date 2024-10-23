@@ -1,6 +1,7 @@
 <script lang="ts">
-	import { api_url } from '$lib/constants';
-	import { customer_id, tailor_id, merchant_id } from '$lib/constants';
+	import { preventDefault } from 'svelte/legacy';
+
+	import { api_url, userTypes } from '$lib/constants';
 	import { Button } from '$lib/components/ui/button';
 	import { Input } from '$lib/components/ui/input';
 	import { Label } from '$lib/components/ui/label';
@@ -8,14 +9,14 @@
 	import { Eye, EyeOff } from 'lucide-svelte';
 	import { toast } from 'svelte-sonner';
 
-	let usertype: string;
-	let name = '';
-	let email = '';
-	let password = '';
-	let nameInputError = '';
-	let emailInputError = '';
-	let passwordInputError = '';
-	let showPassword = false;
+	let usertype = $state(-1);
+	let name = $state('');
+	let email = $state('');
+	let password = $state('');
+	let nameInputError = $state('');
+	let emailInputError = $state('');
+	let passwordInputError = $state('');
+	let showPassword = $state(false);
 
 	function validateName() {
 		const nameRegex = /^[A-Za-z]+$/;
@@ -38,7 +39,7 @@
 
 	async function handleSubmit() {
 		const formData = {
-			usertype: parseInt(usertype),
+			usertype: usertype,
 			name,
 			email,
 			password
@@ -83,18 +84,15 @@
 	</header>
 	<form
 		class="mb-4 mt-10 w-full max-w-md rounded bg-white px-8 pb-8 pt-6 shadow-md"
-		on:submit|preventDefault={handleSubmit}
+		onsubmit={preventDefault(handleSubmit)}
 	>
-		<div class="mb-6">
-			<label class="mb-2 block text-sm font-bold text-gray-700" for="userType">What are you</label>
-			<select
-				class="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
-				id="userType"
-				bind:value={usertype}
-			>
-				<option value={customer_id}>A Customer</option>
-				<option value={tailor_id}>A Tailor</option>
-				<option value={merchant_id}>A Merchant</option>
+		<div class="space-y-2">
+			<label for="userType">What are you</label>
+			<select bind:value={usertype} class="w-full rounded border border-gray-300 p-2">
+				<option value="" disabled selected>User Type</option>
+				{#each userTypes as [type, value]}
+					<option {value}>{type}</option>
+				{/each}
 			</select>
 		</div>
 
@@ -131,7 +129,7 @@
 				<button
 					type="button"
 					class="absolute right-2 top-1/2 -translate-y-1/2"
-					on:click={() => (showPassword = !showPassword)}
+					onclick={() => (showPassword = !showPassword)}
 				>
 					{#if !showPassword}
 						<EyeOff class="h-5 w-5" />
