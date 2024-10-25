@@ -1,151 +1,150 @@
 <script lang="ts">
-	import NavBar from '$lib/components/NavBar.svelte';
-	import type { ViewAttribute } from '$lib/components/ViewCard.svelte';
+	import { Button } from '$lib/components/ui/button';
+	import { Input } from '$lib/components/ui/input';
+	import { Label } from '$lib/components/ui/label';
+	import { Card } from '$lib/components/ui/card';
+	import { Plus } from 'lucide-svelte';
+	import { toast } from 'svelte-sonner';
+	import { onMount } from 'svelte';
+	import { api_url } from '$lib/constants';
 
-	const attributes: ViewAttribute[] = [
-		{ name: 'Material Name' },
-		{ name: 'Material Type' },
-		{ name: 'Size' },
-		{ name: 'Cost Per Unit' },
-		{ name: 'Stock Quantity' }
-	];
+	type ViewAttribute = {
+		name: string;
+		value: string;
+		inputType: string;
+		options?: { type_id: string; name: string }[];
+	};
 
-	function addImage() {
-		alert('Add image...');
-	}
+	let attributes: ViewAttribute[] = $state([
+		{ name: 'Material Name', value: '', inputType: 'text' },
+		{ name: 'Material Type', value: '', inputType: 'select', options: [] },
+		{ name: 'Cost Per Unit (m^2)', value: '', inputType: 'number' },
+		{ name: 'Stock Quantity', value: '', inputType: 'number' }
+	]);
 
-	function saveItem() {
-		alert('Item saved!!!'); // delete this
-
-		// API call to save item to be implement
-
-		let inputGroups = document.querySelectorAll('.input-group');
-		for (let inputGroup of inputGroups) {
-			let input = inputGroup.querySelector('input');
-			input.value = '';
+	async function fetchMaterialTypes() {
+		try {
+			const res = await fetch(`${api_url}/merchant/material-types`);
+			const data = await res.json();
+			const materialTypeAttr = attributes.find((attr) => attr.name === 'Material Type');
+			if (materialTypeAttr) materialTypeAttr.options = data;
+		} catch (error) {
+			console.error('Error fetching material types:', error);
 		}
 	}
+
+	let imageFile: { file: File; url: string } | null = $state(null);
+
+	function handleImageUpload(event: Event) {
+		const target = event.target as HTMLInputElement;
+		if (target.files && target.files.length > 0) {
+			const file = target.files[0];
+			const url = URL.createObjectURL(file);
+			imageFile = { file, url };
+		}
+	}
+
+	function triggerFilePicker() {
+		const fileInput = document.getElementById('imageUpload') as HTMLInputElement;
+		if (fileInput) {
+			fileInput.click();
+		}
+	}
+
+	async function saveItem() {
+		const formData = new FormData();
+		if (imageFile?.file) {
+			formData.append('image_file', imageFile.file);
+		} else {
+			toast.error('Please select an image');
+			throw new Error('No image selected');
+		}
+
+		const data = {
+			material_name: attributes.find((attr) => attr.name === 'Material Name')?.value,
+			material_type: attributes.find((attr) => attr.name === 'Material Type')?.value,
+			cost_per_unit: Number(attributes.find((attr) => attr.name === 'Cost Per Unit (m^2)')?.value),
+			stock_quantity: Number(attributes.find((attr) => attr.name === 'Stock Quantity')?.value)
+		};
+		formData.append('data', new Blob([JSON.stringify(data)], { type: 'application/json' }));
+
+		try {
+			const res = await fetch(`${api_url}/merchant/add`, {
+				method: 'POST',
+				body: formData
+			});
+
+			if (!res.ok) {
+				throw new Error('Failed to save item');
+			}
+
+			toast.success('Item saved successfully!');
+
+			imageFile = null;
+			attributes = attributes.map((attr) => ({ ...attr, value: '' }));
+		} catch (error) {
+			console.error('Error saving item:', error);
+			toast.error('Failed to save item. Please try again.');
+		}
+	}
+	onMount(fetchMaterialTypes);
 </script>
 
-<div class="page-container">
-	<NavBar />
+<div class="container mx-auto mt-8 p-4">
+	<div class="flex flex-wrap gap-8">
+		<Card class="flex h-96 w-72 items-center justify-center overflow-hidden">
+			{#if imageFile}
+				<img src={imageFile.url} alt="Selected Material" class="h-full w-full object-cover" />
+			{:else}
+				<Button variant="outline" size="icon" class="h-16 w-16" on:click={triggerFilePicker}>
+					<Plus class="h-8 w-8" />
+				</Button>
+			{/if}
+			<Input
+				type="file"
+				accept="image/*"
+				on:change={handleImageUpload}
+				class="hidden"
+				id="imageUpload"
+			/>
+		</Card>
+		<div class="flex-1 space-y-4">
+			{#each attributes as attribute}
+				<div class="grid w-full max-w-sm items-center gap-1.5">
+					<Label for={attribute.name.toLowerCase().replace(/\s+/g, '-')} class="text-primary">
+						{attribute.name}
+					</Label>
 
-	<div class="content-wrapper">
-		<div class="main-content">
-			<div class="image-box">
-				<a id="add-button" onclick={addImage}>+</a>
-			</div>
-			<div class="item-details">
-				{#each attributes as attribute, index}
-					<div class="input-group">
-						<label>{attribute.name}:</label>
-						<input type="text" />
-						<!-- <span></span> -->
-					</div>
-				{/each}
-				<button onclick={saveItem} class="save-button">Save item</button>
-			</div>
+					{#if attribute.inputType === 'select'}
+						<select
+							id={attribute.name.toLowerCase().replace(/\s+/g, '-')}
+							bind:value={attribute.value}
+							class="w-full rounded border px-2 py-1"
+						>
+							<option value="" disabled>Select {attribute.name.toLowerCase()}</option>
+							{#each attribute.options! as option}
+								<option value={option.type_id}>{option.name}</option>
+							{/each}
+						</select>
+					{:else if attribute.inputType == 'number'}
+						<Input
+							type={attribute.inputType}
+							id={attribute.name.toLowerCase().replace(/\s+/g, '-')}
+							bind:value={attribute.value}
+							placeholder={`Enter ${attribute.name.toLowerCase()}`}
+							min="0"
+						/>
+					{:else}
+						<Input
+							type={attribute.inputType}
+							id={attribute.name.toLowerCase().replace(/\s+/g, '-')}
+							bind:value={attribute.value}
+							placeholder={`Enter ${attribute.name.toLowerCase()}`}
+						/>
+					{/if}
+				</div>
+			{/each}
+			<Button class="mt-4" onclick={saveItem}>Save Item</Button>
 		</div>
 	</div>
 </div>
-
-<style>
-	.page-container {
-		display: flex;
-		flex-direction: column;
-		min-height: 100vh;
-	}
-
-	.content-wrapper {
-		display: flex;
-		flex: 1;
-		overflow-x: hidden;
-	}
-
-	.main-content {
-		flex: 1;
-		display: inline-flex;
-		flex-wrap: wrap;
-		padding: 5px;
-		margin: 55px 0 0 60px;
-	}
-
-	.image-box {
-		width: 300px;
-		height: 450px;
-		border-radius: 20px;
-		border: 0.5px solid #000000;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-	}
-
-	.item-details {
-		padding: 25px 0 0 40px;
-		display: flex;
-		flex-direction: column;
-		gap: 15px;
-	}
-
-	.input-group {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		margin-bottom: 10px;
-	}
-
-	.input-group label {
-		flex: 1;
-		margin-right: 5px;
-		font-weight: bold;
-		font-size: 16px;
-		color: #e1b42f;
-	}
-
-	.input-group input,
-	.input-group span {
-		flex: 1.5;
-		/* font-size: 12px; */
-		padding: 4px;
-		height: 28px;
-		border: 1px solid #000;
-		border-radius: 25px;
-		background-color: #f8f9fa;
-		box-sizing: border-box;
-		width: 100%;
-		/* box-shadow: 0px 4px 4px 0px #00000040 inset; */
-	}
-
-	#add-button {
-		width: 73px;
-		height: 72px;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		border-radius: 10px;
-		background: #e1b42f;
-		font-size: 50px;
-		padding: auto;
-		color: white;
-		cursor: pointer;
-	}
-
-	#add-button:hover {
-		box-shadow: 2px 4px 4px 2px rgba(0, 0, 0, 0.25);
-	}
-
-	.save-button {
-		/* flex: 1; */
-		padding: 8px 10px;
-		border: none;
-		border-radius: 12px;
-		cursor: pointer;
-		font-size: 14px;
-		margin: 10px 0 5px 0;
-		background-color: #e1b42f;
-		color: white;
-	}
-	.save-button:hover {
-		box-shadow: 2px 4px 4px 2px rgba(0, 0, 0, 0.25);
-	}
-</style>

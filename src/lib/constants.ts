@@ -1,4 +1,5 @@
 export const api_url = 'http://cozywear.me/api';
+export const image_url = 'http://cozywear.me/images';
 
 export const userTypes = new Map([
 	['Customer', 0],
