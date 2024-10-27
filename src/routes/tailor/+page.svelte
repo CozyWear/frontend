@@ -9,7 +9,6 @@
 	import { Dialog, DialogContent, DialogHeader, DialogTitle } from '$lib/components/ui/dialog';
 	import { Label } from '$lib/components/ui/label';
 	import { Input } from '$lib/components/ui/input';
-	import { base } from '$app/paths';
 
 	let showEditDialog = $state(false);
 	let editingStyle: Style | null = $state(null);
