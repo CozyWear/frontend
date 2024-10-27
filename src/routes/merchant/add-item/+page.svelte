@@ -74,10 +74,6 @@
 				body: formData
 			});
 
-			if (!res.ok) {
-				throw new Error('Failed to save item');
-			}
-
 			toast.success('Item saved successfully!');
 
 			imageFile = null;
@@ -87,6 +83,7 @@
 			toast.error('Failed to save item. Please try again.');
 		}
 	}
+
 	onMount(fetchMaterialTypes);
 </script>
 

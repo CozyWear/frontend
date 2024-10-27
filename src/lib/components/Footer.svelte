@@ -3,7 +3,7 @@
 	import { Separator } from '$lib/components/ui/separator';
 </script>
 
-<footer class="bg-gray-800 py-8 text-white">
+<footer class=" bg-gray-800 py-8 text-white">
 	<div class="container mx-auto px-4">
 		<div class="grid grid-cols-1 gap-8 md:grid-cols-3">
 			<div>
