@@ -5,6 +5,7 @@
 	import { toast } from 'svelte-sonner';
 	import { image_url } from '$lib/constants';
 	import { goto } from '$app/navigation';
+	import TryOnButton from './TryOnButton.svelte';
 
 	interface Style {
 		id: string;
@@ -43,6 +44,10 @@
 		materialtype: '',
 		name: ''
 	});
+
+	let selectedStyleImageUrl: string = $derived(
+		`${image_url}/image/original/${selectedStyle.filename}`
+	);
 
 	let totalCost = $derived(selectedStyle.costperunit + selectedMaterial.costperunit);
 	let availableFitTypes: Map<string, string> = $state(new Map());
@@ -176,7 +181,7 @@
 				<h2 class="text-xl font-semibold">Selected Style</h2>
 				<div class="overflow-hidden rounded-lg">
 					<img
-						src={`${image_url}/image/original/${selectedStyle.filename}`}
+						src={selectedStyleImageUrl}
 						alt={selectedStyle.name}
 						class="h-64 w-full object-cover"
 					/>
@@ -232,6 +237,10 @@
 						{availableMaterialTypes.get(selectedMaterial.materialtype)}
 					</div>
 				</div>
+			</div>
+
+			<div class="space-y-4">
+				<TryOnButton styleImageUrl={selectedStyleImageUrl} />
 			</div>
 		</div>
 
