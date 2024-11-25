@@ -31,7 +31,6 @@
 		per_page: number;
 	}
 
-	// For storing both of the ID's
 	let selectedStyleId: string = $state('');
 	let selectedMaterialId: string = $state('');
 
@@ -134,6 +133,14 @@
 		}
 	}
 
+	/*function handleCustomerButton(styleId: string) {
+	selectedStyle = styles.items.find((style) => style.id === styleId)!;
+	if (selectedStyle) {
+		localStorage.setItem('selectedStyle', JSON.stringify(selectedStyle));
+		goto('/style');
+	}
+}*/
+
 	function closeDialog() {
 		selectedStyle = {
 			id: '',
@@ -165,7 +172,7 @@
 			);
 			const data = await res.json();
 			console.log(data);
-			materialVariants = data; // Assuming the response is an array of variants
+			materialVariants = data;
 		} catch (error) {
 			toast.error('Failed to fetch material variants');
 			console.error('Error fetching material variants:', error);
@@ -175,13 +182,13 @@
 	function handleChooseMaterial() {
 		if (selectedStyle) {
 			fetchMaterialVariants(selectedStyle.material_type_id);
-			showDialog = false; // Close the style dialog
-			showMaterialDialog = true; // Open the material dialog
+			showDialog = false;
+			showMaterialDialog = true;
 		}
 	}
 
 	function closeMaterialDialog() {
-		showMaterialDialog = false; // Hide the material dialog
+		showMaterialDialog = false;
 	}
 </script>
 
