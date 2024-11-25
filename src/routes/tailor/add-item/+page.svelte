@@ -7,7 +7,6 @@
 	import { toast } from 'svelte-sonner';
 	import { onMount } from 'svelte';
 	import { api_url } from '$lib/constants';
-	import { base } from '$app/paths';
 
 	type ViewAttribute = {
 		name: string;
@@ -42,25 +41,21 @@
 		}
 	}
 
-	let baseType: string = $derived(
-		attributes.find((attr) => attr.name === 'Base Style Type')!.value!
-	);
-
 	async function fetchStyleTypes() {
 		const baseStyleType = attributes.find((attr) => attr.name === 'Base Style Type')?.value;
 		if (!baseStyleType) return;
 
 		try {
-			const res = await fetch(`${api_url}/tailor/style-types/${baseStyleType}`);
-			if (!res.ok) throw new Error(`Failed to fetch style types: ${res.status} ${res.statusText}`);
-
+			const res = await fetch(`${api_url}/tailor/style-types-with-base-type/${baseStyleType}`);
 			const data = await res.json();
 			const styletypeAttr = attributes.find((attr) => attr.name === 'Style Type');
 			if (styletypeAttr)
-				styletypeAttr.options = data.map((type: { style_id: string; name: string }) => ({
-					type_id: type.style_id,
-					name: type.name
-				}));
+				styletypeAttr.options = data.map(
+					(type: { style_id: string; base_style_type: string; name: string }) => ({
+						type_id: type.style_id,
+						name: type.name
+					})
+				);
 		} catch (error) {
 			console.error('Error fetching style types:', error);
 		}
@@ -127,8 +122,8 @@
 			material_type_required: attributes.find((attr) => attr.name === 'Material Type')?.value,
 			description: attributes.find((attr) => attr.name === 'Description')?.value
 		};
-		formData.append('data', new Blob([JSON.stringify(data)], { type: 'application/json' }));
 
+		formData.append('data', new Blob([JSON.stringify(data)], { type: 'application/json' }));
 		try {
 			const res = await fetch(`${api_url}/tailor/add`, {
 				method: 'POST',

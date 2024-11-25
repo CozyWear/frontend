@@ -4,6 +4,7 @@
 	import { Button } from '$lib/components/ui/button';
 	import { toast } from 'svelte-sonner';
 	import { image_url } from '$lib/constants';
+	import { goto } from '$app/navigation';
 
 	interface Style {
 		id: string;
@@ -17,7 +18,7 @@
 	}
 
 	interface MaterialVariant {
-		id: string; // Assuming each variant has an id
+		id: string;
 		name: string;
 		filename: string;
 		costperunit: number;
@@ -108,6 +109,9 @@
 		try {
 			const res = await fetch(`${api_url}/tailor/base-style-types`);
 			const data = await res.json();
+			data.forEach((element: { base_id: string; name: string }) => {
+				availableBaseStyleTypes.set(element.base_id, element.name);
+			});
 		} catch (error) {
 			console.error('Error fetching base style types:', error);
 		}
@@ -116,14 +120,12 @@
 	let availableStyleTypes: Map<string, string[]> = $state(new Map());
 	async function fetchStyleTypes() {
 		try {
-			const res = await fetch(`${api_url}/tailor/style-types?base_style_type=`);
+			const res = await fetch(`${api_url}/tailor/style-types`);
 			const data = await res.json();
-			availableStyleTypes = new Map(
-				data.map((item: { style_id: string; base_style_type: string; name: string }) => [
-					item.style_id,
-					[item.base_style_type, item.name]
-				])
-			);
+
+			data.forEach((item: { style_id: string; base_style_type: string; name: string }) => {
+				availableStyleTypes.set(item.style_id, [item.base_style_type, item.name]);
+			});
 		} catch (error) {
 			console.error('Error fetching style types:', error);
 		}
@@ -134,11 +136,35 @@
 		fetchMaterialDetails();
 		fetchMaterialTypes();
 		fetchFitTypes();
+		fetchBaseStyleTypes();
 		fetchStyleTypes();
 	});
 
-	function handleCheckout() {
-		// Implement checkout logic
+	let size = $state('');
+	let specialInstructions = $state('');
+	async function handleCheckout() {
+		let data = {
+			cloth_style_id: selectedStyle.id,
+			material_id: selectedMaterial.id,
+			size: size.trim(),
+			special_instructions: specialInstructions.trim(),
+			payment_amount: totalCost
+		};
+
+		try {
+			let res = await fetch(`${api_url}/customer/place-order`, {
+				method: 'POST',
+				body: JSON.stringify(data),
+				headers: { 'Content-Type': 'application/json' }
+			});
+			if (res.status == 201) {
+				toast.success('Order placed successfully');
+				goto('/customer');
+			}
+		} catch (error) {
+			console.log('Something unexpected happened:', error);
+			toast.error('Unable to place order.');
+		}
 	}
 </script>
 
@@ -168,17 +194,17 @@
 						<span class="font-semibold">Base Style:</span>
 						<span class="ml-2"
 							>{availableBaseStyleTypes.get(
-								availableStyleTypes.get(selectedStyle.style_id)![1][0]
+								availableStyleTypes.get(selectedStyle.style_id)![0]
 							)}</span
 						>
 					</div>
 					<div class="border-b pb-2">
 						<span class="font-semibold">Style Type:</span>
-						<span class="ml-2">{availableStyleTypes.get(selectedStyle.style_id)}</span>
+						<span class="ml-2">{availableStyleTypes.get(selectedStyle.style_id)![1]}</span>
 					</div>
 					<div>
 						<span class="font-semibold">Cost Per Unit:</span>
-						<span class="ml-2">${selectedStyle.costperunit}</span>
+						<span class="ml-2">{selectedStyle.costperunit}</span>
 					</div>
 				</div>
 			</div>
@@ -193,14 +219,48 @@
 					/>
 				</div>
 				<div class="space-y-2 rounded-lg bg-white p-4 shadow">
-					<p><span class="font-semibold">Name:</span> {selectedMaterial.name}</p>
-					<p><span class="font-semibold">Cost:</span> ${selectedMaterial.costperunit}</p>
+					<div class="border-b pb-2">
+						<span class="font-semibold">Name:</span>
+						{selectedMaterial.name}
+					</div>
+					<div class="border-b pb-2">
+						<span class="font-semibold">Cost:</span>
+						{selectedMaterial.costperunit}
+					</div>
+					<div class="border-b pb-2">
+						<span class="font-semibold">Material Type:</span>
+						{availableMaterialTypes.get(selectedMaterial.materialtype)}
+					</div>
 				</div>
 			</div>
 		</div>
 
+		<div class="mt-8 space-y-4">
+			<div class="rounded-lg bg-white p-4 shadow">
+				<label for="size" class="block text-sm font-medium text-gray-700">Size</label>
+				<input
+					type="text"
+					id="size"
+					class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+					bind:value={size}
+					placeholder="Enter measurments here"
+				/>
+			</div>
+			<div class="rounded-lg bg-white p-4 shadow">
+				<label for="instructions" class="block text-sm font-medium text-gray-700"
+					>Special Instructions</label
+				>
+				<textarea
+					id="instructions"
+					class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+					bind:value={specialInstructions}
+					placeholder="Any specific instructions..."
+				></textarea>
+			</div>
+		</div>
+
 		<div class="mt-8 rounded-lg border bg-white p-4 shadow">
-			<p class="text-xl font-bold">Total Cost: ${totalCost}</p>
+			<p class="text-xl font-bold">Total Cost: {totalCost}</p>
 			<Button class="mt-4" on:click={handleCheckout}>Proceed to Checkout</Button>
 		</div>
 	{:else}

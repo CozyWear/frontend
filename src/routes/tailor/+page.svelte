@@ -20,31 +20,6 @@
 
 	onMount(async () => {
 		fetchStyles();
-
-		const fitRes = await fetch(`${api_url}/tailor/fit-types`);
-		const fitData = await fitRes.json();
-		fitData.forEach((element: { fit_id: string; name: string }) => {
-			availableFitTypes.set(element.fit_id, element.name);
-		});
-
-		const materialRes = await fetch(`${api_url}/merchant/material-types`);
-		const materialData = await materialRes.json();
-		materialData.forEach((element: { type_id: string; name: string }) => {
-			availableMaterialTypes.set(element.type_id, element.name);
-		});
-
-		const baseStyleTypeRes = await fetch(`${api_url}/tailor/base-style-types`);
-		const baseStyleTypeData = await baseStyleTypeRes.json();
-		baseStyleTypeData.forEach((element: { base_id: string; name: string }) => {
-			availableBaseStyleTypes.set(element.base_id, element.name);
-		});
-		const StyleTypeRes = await fetch(`${api_url}/tailor/style-types`);
-		const StyleTypeData = await StyleTypeRes.json();
-		StyleTypeData.forEach(
-			(element: { style_id: string; base_style_type: string; name: string }) => {
-				availableStyleTypes.set(element.style_id, [element.base_style_type, element.name]);
-			}
-		);
 	});
 
 	interface Style {
@@ -80,6 +55,31 @@
 	let loading = false;
 
 	async function fetchStyles() {
+		const fitRes = await fetch(`${api_url}/tailor/fit-types`);
+		const fitData = await fitRes.json();
+		fitData.forEach((element: { fit_id: string; name: string }) => {
+			availableFitTypes.set(element.fit_id, element.name);
+		});
+
+		const materialRes = await fetch(`${api_url}/merchant/material-types`);
+		const materialData = await materialRes.json();
+		materialData.forEach((element: { type_id: string; name: string }) => {
+			availableMaterialTypes.set(element.type_id, element.name);
+		});
+
+		const baseStyleTypeRes = await fetch(`${api_url}/tailor/base-style-types`);
+		const baseStyleTypeData = await baseStyleTypeRes.json();
+		baseStyleTypeData.forEach((element: { base_id: string; name: string }) => {
+			availableBaseStyleTypes.set(element.base_id, element.name);
+		});
+		const StyleTypeRes = await fetch(`${api_url}/tailor/style-types`);
+		const StyleTypeData = await StyleTypeRes.json();
+		StyleTypeData.forEach(
+			(element: { style_id: string; base_style_type: string; name: string }) => {
+				availableStyleTypes.set(element.style_id, [element.base_style_type, element.name]);
+			}
+		);
+
 		loading = true;
 		try {
 			const res = await fetch(`${api_url}/tailor/styles?page=${page}&per_page=${per_page}`, {
